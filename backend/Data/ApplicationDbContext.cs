@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using schoolApi.Models;
 
 namespace schoolApi.Data;
 
@@ -14,4 +15,10 @@ public class ApplicationDbContext : DbContext
     {
     }
 
+    public DbSet<Student> Student { get; set; }
+    public DbSet<Teacher> Teacher { get; set; }
+    public DbSet<Course> Course { get; set; }
+    public DbSet<Classroom> Classroom { get; set; }
+    public DbSet<SubjectMatter> SubjectMatter { get; set; }
+    public DbSet<StudentSubjectMatter> StudentSubjectMatter { get; set; }
 }
