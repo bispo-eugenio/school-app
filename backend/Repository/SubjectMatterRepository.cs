@@ -12,7 +12,7 @@ public class SubjectMatterRepository : ISubjectMatterRepository
         _context = context;
     }
 
-    public async Task<List<SubjectMatter>> GetAll()
+    public async Task<List<SubjectMatter>> GetAllAsync()
     {
         return await _context.SubjectMatter.ToListAsync();
     }

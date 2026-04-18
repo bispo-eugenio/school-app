@@ -13,7 +13,7 @@ public class TeacherRepository : ITeacherRepository
         _context = context;
     }
 
-    public async Task<List<Teacher>> GetAll()
+    public async Task<List<Teacher>> GetAllAsync()
     {
         return await _context.Teacher.ToListAsync();
     }

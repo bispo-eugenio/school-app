@@ -13,7 +13,7 @@ public class CourseRepository : ICourseRepository
         _context = context;
     }
 
-    public async Task<List<Course>> GetAll()
+    public async Task<List<Course>> GetAllAsync()
     {
         return await _context.Course.ToListAsync();
     }
