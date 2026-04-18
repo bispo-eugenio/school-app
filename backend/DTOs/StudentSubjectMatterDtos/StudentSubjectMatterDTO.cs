@@ -4,7 +4,6 @@ namespace schoolApi.Dtos.StudentSubjectMatterDtos;
 
 public class StudentSubjectMatterDTO
 {
-    public int Id { get; set; }
     public Guid Register { get; set; }
     public int StudentId { get; set; }
     public int SubjectMatterId { get; set; }

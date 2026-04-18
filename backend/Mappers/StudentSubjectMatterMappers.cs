@@ -9,7 +9,6 @@ public static class StudentSubjectMatterMappers
     {
         return new StudentSubjectMatterDTO
         {
-            Id = studentSubjectMatterModel.Id,
             Register = studentSubjectMatterModel.Register,
             StudentId = studentSubjectMatterModel.StudentId,
             SubjectMatterId = studentSubjectMatterModel.SubjectMatterId,

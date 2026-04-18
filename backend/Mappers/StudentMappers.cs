@@ -15,7 +15,6 @@ public static class StudentMappers
             Cpf = studentModel.Cpf,
             Age = studentModel.Age,
             CreatedOn = studentModel.CreatedOn,
-            ClassroomId = studentModel.ClassroomId,
             CourseId = studentModel.CourseId,
             StudentSubjectMatters = studentModel.StudentSubjectMatters
         };
@@ -28,7 +27,6 @@ public static class StudentMappers
             Name = studentRequest.Name,
             Cpf = studentRequest.Cpf,
             Age = studentRequest.Age,
-            ClassroomId = studentRequest.ClassroomId,
             CourseId = studentRequest.CourseId,
         };
     }

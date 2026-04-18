@@ -10,7 +10,6 @@ public class StudentDTO
     public string Cpf { get; set; } = "";
     public int Age { get; set; }
     public DateTime CreatedOn { get; set; }
-    public int ClassroomId { get; set; }
     public int CourseId { get; set; }
     public List<StudentSubjectMatter> StudentSubjectMatters { get; set; } = [];
 }

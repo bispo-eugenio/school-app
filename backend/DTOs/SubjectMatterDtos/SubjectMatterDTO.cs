@@ -8,7 +8,7 @@ public class SubjectMatterDTO
     public Guid Register { get; set; }
     public string Name { get; set; } = "";
     public string Day { get; set; } = "";
-    public DateTime Hours { get; set; }
+    public TimeSpan Hours { get; set; }
     public string Details { get; set; } = "";
     public DateTime CreatedOn { get; set; }
     public List<StudentSubjectMatter> StudentSubjectMatters { get; set; } = [];

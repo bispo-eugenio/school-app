@@ -8,8 +8,7 @@ public class Classroom
     public int Id { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Register { get; set; } = Guid.NewGuid();
-    [Required(ErrorMessage = "Name is required.")]
     public string Name { get; set; } = "";
     public DateTime CreatedOn { get; set; } = DateTime.Now;
-    public int SubjectMatterId { get; set; }
+    public int? SubjectMatterId { get; set; } = null;
 }

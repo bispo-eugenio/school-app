@@ -11,13 +11,13 @@ public class SubjectMatter
     [Column(TypeName = "ENUM('Monday', 'Tuesday', ' Wednesday'," +
     " 'Thusday', 'Friday', 'Saturday', 'Sunday') DEFAULT 'Monday'")]
     public string Day { get; set; } = "";
-    [Column(TypeName = "DATETIME")]
-    public DateTime Hours { get; set; }
+    [Column(TypeName = "TIME")]
+    public TimeSpan Hours { get; set; }
     [Column(TypeName = "TEXT")]
     public string Details { get; set; } = "";
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     public List<StudentSubjectMatter> StudentSubjectMatters { get; set; } = [];
     public List<Course> Courses { get; set; } = [];
-    public Classroom? Classroom { get; set; }
-    public Teacher? Teacher { get; set; }
+    public Classroom? Classroom { get; set; } = null;
+    public Teacher? Teacher { get; set; } = null;
 }
