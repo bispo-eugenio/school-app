@@ -13,6 +13,6 @@ public class SubjectMatterDTO
     public DateTime CreatedOn { get; set; }
     public List<StudentSubjectMatter> StudentSubjectMatters { get; set; } = [];
     public List<Course> Courses { get; set; } = [];
-    public Classroom? Classroom { get; set; }
-    public Teacher? Teacher { get; set; }
+    public int? ClassroomId { get; set; }
+    public int? TeacherId { get; set; }
 }

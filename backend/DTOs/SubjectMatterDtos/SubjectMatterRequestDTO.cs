@@ -8,4 +8,6 @@ public class SubjectMatterRequestDTO
     public string Day { get; set; } = "";
     public TimeSpan Hours { get; set; }
     public string Details { get; set; } = "";
+    public int? ClasroomId { get; set; }
+    public int? TeacherId { get; set; }
 }
