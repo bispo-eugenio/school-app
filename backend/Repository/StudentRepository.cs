@@ -15,12 +15,12 @@ public class StudentRepository : IStudentRepository
 
     public async Task<List<Student>> GetAllAsync()
     {
-        return await _context.Student.ToListAsync();
+        return await _context.Student.Include(s => s.StudentSubjectMatters).ToListAsync();
     }
 
     public async Task<Student?> GetByIdAsync(int id)
     {
-        return await _context.Student.FindAsync(id);
+        return await _context.Student.Include(s => s.StudentSubjectMatters).FirstOrDefaultAsync(s => s.Id == id);
     }
 
     public async Task<Student> PostAsync(Student student)

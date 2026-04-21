@@ -14,12 +14,12 @@ public class SubjectMatterRepository : ISubjectMatterRepository
 
     public async Task<List<SubjectMatter>> GetAllAsync()
     {
-        return await _context.SubjectMatter.ToListAsync();
+        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).ToListAsync();
     }
 
     public async Task<SubjectMatter?> GetByIdAsync(int id)
     {
-        return await _context.SubjectMatter.FindAsync(id);
+        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).FirstOrDefaultAsync(s => s.Id == id);
     }
 
     public async Task<SubjectMatter> PostAsync(SubjectMatter subjectMatter)

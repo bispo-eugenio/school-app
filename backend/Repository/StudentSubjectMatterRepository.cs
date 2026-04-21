@@ -18,9 +18,11 @@ public class StudentSubjectMatterRepository : IStudentSubjectMatterRepository
         return await _context.StudentSubjectMatter.ToListAsync();
     }
 
-    public async Task<StudentSubjectMatter?> GetByIdAsync(int id)
+    public async Task<StudentSubjectMatter?> GetByIdAsync(List<int>? dualId)
     {
-        return await _context.StudentSubjectMatter.FindAsync(id);
+        if (dualId == null)
+            return null;
+        return await _context.StudentSubjectMatter.FindAsync(dualId[0], dualId[1]);
     }
 
     public async Task<StudentSubjectMatter> PostAsync(StudentSubjectMatter studentSubjectMatter)
