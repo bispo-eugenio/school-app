@@ -21,4 +21,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<Classroom> Classroom { get; set; }
     public DbSet<SubjectMatter> SubjectMatter { get; set; }
     public DbSet<StudentSubjectMatter> StudentSubjectMatter { get; set; }
+    public DbSet<CourseSubjectMatter> CourseSubjectMatter { get; set; }
 }
