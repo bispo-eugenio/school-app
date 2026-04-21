@@ -1,4 +1,5 @@
 ﻿using schoolApi.Dtos.StudentSubjectMatterDtos;
+using schoolApi.Helpers;
 using schoolApi.Models;
 
 namespace schoolApi.Mappers;
@@ -26,7 +27,9 @@ public static class StudentSubjectMatterMappers
             SubjectMatterId = studentSubjectMatterRequest.SubjectMatterId,
             RecordGradeOne = studentSubjectMatterRequest.RecordGradeOne,
             RecordGradeTwo = studentSubjectMatterRequest.RecordGradeTwo,
-            RecordGradeTotal = studentSubjectMatterRequest.RecordGradeTotal
+            RecordGradeTotal = MathExtensions.Average(
+                [studentSubjectMatterRequest.RecordGradeOne,
+                studentSubjectMatterRequest.RecordGradeTwo])
         };
     }
 }

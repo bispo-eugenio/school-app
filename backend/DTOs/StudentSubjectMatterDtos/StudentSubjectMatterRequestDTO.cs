@@ -6,5 +6,4 @@ public class StudentSubjectMatterRequestDTO
     public int SubjectMatterId { get; set; }
     public decimal RecordGradeOne { get; set; }
     public decimal RecordGradeTwo { get; set; }
-    public decimal RecordGradeTotal { get; set; }
 }
