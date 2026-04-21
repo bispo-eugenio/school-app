@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using schoolApi.Data;
+using schoolApi.DTOs.SubjectMatterDtos;
 using schoolApi.Models;
 
 namespace schoolApi.Repository;
@@ -12,14 +13,29 @@ public class SubjectMatterRepository : ISubjectMatterRepository
         _context = context;
     }
 
+    public async Task<SubjectMatter?> DeleteAsync(int id)
+    {
+        var subjectMatterModel = await _context.SubjectMatter.FirstOrDefaultAsync(s => s.Id == id);
+
+        if (subjectMatterModel == null)
+            return subjectMatterModel;
+
+        _context.SubjectMatter.Remove(subjectMatterModel);
+        await _context.SaveChangesAsync();
+
+        return subjectMatterModel;
+
+    }
+
+
     public async Task<List<SubjectMatter>> GetAllAsync()
     {
-        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).ToListAsync();
+        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).Include(s => s.Classroom).ToListAsync();
     }
 
     public async Task<SubjectMatter?> GetByIdAsync(int id)
     {
-        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).FirstOrDefaultAsync(s => s.Id == id);
+        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).Include(s => s.Classroom).FirstOrDefaultAsync(s => s.Id == id);
     }
 
     public async Task<SubjectMatter> PostAsync(SubjectMatter subjectMatter)
@@ -30,4 +46,22 @@ public class SubjectMatterRepository : ISubjectMatterRepository
 
         return subjectMatter;
     }
+
+    public async Task<SubjectMatter?> UpdateAsync(int id, UpdateSubjectMatterRequestDTO updateSubjectMatterRequest)
+    {
+        var subjectMatterModel = await _context.SubjectMatter.FirstOrDefaultAsync(s => s.Id == id);
+
+        if (subjectMatterModel == null)
+            return subjectMatterModel;
+
+        subjectMatterModel.Name = updateSubjectMatterRequest.Name;
+        subjectMatterModel.Day = updateSubjectMatterRequest.Day;
+        subjectMatterModel.Hours = updateSubjectMatterRequest.Hours;
+        subjectMatterModel.Details = updateSubjectMatterRequest.Details;
+        subjectMatterModel.TeacherId = updateSubjectMatterRequest.TeacherId;
+        await _context.SaveChangesAsync();
+
+        return subjectMatterModel;
+    }
+
 }

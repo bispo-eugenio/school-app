@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using schoolApi.Data;
+using schoolApi.DTOs.ClassroomDtos;
 using schoolApi.Interfaces;
 using schoolApi.Models;
 
@@ -12,6 +13,20 @@ public class ClassroomRepository : IClassroomRepository
     {
         _context = context;
     }
+
+    public async Task<Classroom?> DeleteAsync(int id)
+    {
+        var classroomModel = await _context.Classroom.FirstOrDefaultAsync(c => c.Id == id);
+
+        if (classroomModel == null)
+            return classroomModel;
+
+        _context.Classroom.Remove(classroomModel);
+        await _context.SaveChangesAsync();
+
+        return classroomModel;
+    }
+
 
     public async Task<List<Classroom>> GetAllAsync()
     {
@@ -29,6 +44,20 @@ public class ClassroomRepository : IClassroomRepository
         await _context.SaveChangesAsync();
 
         return classroom;
+    }
+
+    public async Task<Classroom?> UpdateAsync(int id, UpdateClassroomRequestDTO updateClassroomRequest)
+    {
+        var classroomModel = await _context.Classroom.FirstOrDefaultAsync(c => c.Id == id);
+
+        if (classroomModel == null)
+            return classroomModel;
+
+        classroomModel.Name = updateClassroomRequest.Name;
+        classroomModel.SubjectMatterId = updateClassroomRequest.SubjectMatterId;
+        await _context.SaveChangesAsync();
+
+        return classroomModel;
     }
 
 }

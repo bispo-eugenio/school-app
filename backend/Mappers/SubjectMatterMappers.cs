@@ -31,6 +31,7 @@ public static class SubjectMatterMappers
             Day = subjectMatterRequest.Day,
             Hours = subjectMatterRequest.Hours,
             Details = subjectMatterRequest.Details,
+            TeacherId = subjectMatterRequest.TeacherId
         };
     }
 }
