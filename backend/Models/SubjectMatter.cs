@@ -17,7 +17,7 @@ public class SubjectMatter
     public string Details { get; set; } = "";
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     public List<StudentSubjectMatter> StudentSubjectMatters { get; set; } = [];
-    public List<Course> Courses { get; set; } = [];
+    public List<CourseSubjectMatter> CourseSubjectMatters { get; set; } = [];
     public Classroom? Classroom { get; set; } = null;
-    public Teacher? Teacher { get; set; } = null;
+    public int? TeacherId { get; set; }
 }

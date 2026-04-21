@@ -1,4 +1,4 @@
-﻿using schoolApi.Models;
+﻿using schoolApi.Dtos.StudentSubjectMatterDtos;
 
 namespace schoolApi.DTOs.StudentDtos;
 
@@ -11,5 +11,5 @@ public class StudentDTO
     public int Age { get; set; }
     public DateTime CreatedOn { get; set; }
     public int CourseId { get; set; }
-    public List<StudentSubjectMatter> StudentSubjectMatters { get; set; } = [];
+    public List<StudentSubjectMatterDTO> StudentSubjectMatters { get; set; } = [];
 }

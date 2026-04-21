@@ -16,7 +16,7 @@ public static class StudentMappers
             Age = studentModel.Age,
             CreatedOn = studentModel.CreatedOn,
             CourseId = studentModel.CourseId,
-            StudentSubjectMatters = studentModel.StudentSubjectMatters
+            StudentSubjectMatters = studentModel.StudentSubjectMatters.Select(ss => ss.ToDTO()).ToList(),
         };
     }
 

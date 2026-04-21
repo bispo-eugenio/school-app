@@ -16,10 +16,10 @@ public static class SubjectMatterMappers
             Hours = subjectMatterModel.Hours,
             Details = subjectMatterModel.Details,
             CreatedOn = subjectMatterModel.CreatedOn,
-            StudentSubjectMatters = subjectMatterModel.StudentSubjectMatters,
-            Courses = subjectMatterModel.Courses,
+            StudentSubjectMatters = subjectMatterModel.StudentSubjectMatters.Select(ss => ss.ToDTO()).ToList(),
+            CourseSubjectMatters = subjectMatterModel.CourseSubjectMatters.Select(csm => csm.ToDTO()).ToList(),
             Classroom = subjectMatterModel.Classroom,
-            Teacher = subjectMatterModel.Teacher
+            TeacherId = subjectMatterModel.TeacherId
         };
     }
 

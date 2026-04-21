@@ -12,5 +12,5 @@ public class Course
     public string Details { get; set; } = "";
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     public List<Student> Students { get; set; } = [];
-    public List<SubjectMatter> SubjectMatters { get; set; } = [];
+    public List<CourseSubjectMatter> CourseSubjectMatters { get; set; } = [];
 }

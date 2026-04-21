@@ -1,3 +1,6 @@
+using schoolApi.DTOs.CourseSubjectMatterDtos;
+using schoolApi.DTOs.StudentDtos;
+using schoolApi.DTOs.SubjectMatterDtos;
 using schoolApi.Models;
 
 namespace schoolApi.DTOs.CourseDtos;
@@ -9,6 +12,6 @@ public class CourseDTO
     public string Name { get; set; } = "";
     public string Details { get; set; } = "";
     public DateTime CreatedOn { get; set; }
-    public List<Student> Students { get; set; } = [];
-    public List<SubjectMatter> SubjectMatters { get; set; } = [];
+    public List<StudentDTO> Students { get; set; } = [];
+    public List<CourseSubjectMatterDTO> CourseSubjectMatters { get; set; } = [];
 }
