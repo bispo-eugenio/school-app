@@ -11,9 +11,9 @@ public class StudentSubjectMatter
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Register { get; set; } = Guid.NewGuid();
     [Column(TypeName = "DECIMAL(4, 2) CHECK (RecordGradeOne <= 10) DEFAULT 0")]
-    public decimal RecordGradeOne { get; set; }
+    public decimal FirstGrade { get; set; }
     [Column(TypeName = "DECIMAL(4, 2) CHECK (RecordGradeTwo <= 10) DEFAULT 0")]
-    public decimal RecordGradeTwo { get; set; }
+    public decimal SecondGrade { get; set; }
     [Column(TypeName = "DECIMAL(4, 2) CHECK (RecordGradeTotal <= 10) DEFAULT 0")]
-    public decimal RecordGradeTotal { get; set; }
+    public decimal GradeTotal { get; set; }
 }

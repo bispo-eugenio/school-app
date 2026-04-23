@@ -58,11 +58,11 @@ public class StudentSubjectMatterRepository : IStudentSubjectMatterRepository
 
         studentSubjectMatterModel.StudentId = updateStudentSubjectMatterRequest.StudentId;
         studentSubjectMatterModel.SubjectMatterId = updateStudentSubjectMatterRequest.SubjectMatterId;
-        studentSubjectMatterModel.RecordGradeOne = updateStudentSubjectMatterRequest.RecordGradeOne;
-        studentSubjectMatterModel.RecordGradeTwo = updateStudentSubjectMatterRequest.RecordGradeTwo;
-        studentSubjectMatterModel.RecordGradeTotal = MathExtensions.Average(
-            [updateStudentSubjectMatterRequest.RecordGradeOne,
-             updateStudentSubjectMatterRequest.RecordGradeTwo]);
+        studentSubjectMatterModel.FirstGrade = updateStudentSubjectMatterRequest.FirstGrade;
+        studentSubjectMatterModel.SecondGrade = updateStudentSubjectMatterRequest.SecondGrade;
+        studentSubjectMatterModel.GradeTotal = MathExtensions.Average(
+            [updateStudentSubjectMatterRequest.FirstGrade,
+             updateStudentSubjectMatterRequest.SecondGrade]);
         await _context.SaveChangesAsync();
 
         return studentSubjectMatterModel;

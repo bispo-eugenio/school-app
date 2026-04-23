@@ -13,7 +13,7 @@ public static class SubjectMatterMappers
             Register = subjectMatterModel.Register,
             Name = subjectMatterModel.Name,
             Day = subjectMatterModel.Day,
-            Hours = subjectMatterModel.Hours,
+            StartedAt = subjectMatterModel.StartedAt,
             Details = subjectMatterModel.Details,
             CreatedOn = subjectMatterModel.CreatedOn,
             StudentSubjectMatters = subjectMatterModel.StudentSubjectMatters.Select(ss => ss.ToDTO()).ToList(),
@@ -29,7 +29,8 @@ public static class SubjectMatterMappers
         {
             Name = subjectMatterRequest.Name,
             Day = subjectMatterRequest.Day,
-            Hours = subjectMatterRequest.Hours,
+            StartedAt = subjectMatterRequest.StartedAt,
+            EndedAt = subjectMatterRequest.EndedAt,
             Details = subjectMatterRequest.Details,
             TeacherId = subjectMatterRequest.TeacherId
         };

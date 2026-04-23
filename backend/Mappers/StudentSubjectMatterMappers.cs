@@ -13,9 +13,9 @@ public static class StudentSubjectMatterMappers
             Register = studentSubjectMatterModel.Register,
             StudentId = studentSubjectMatterModel.StudentId,
             SubjectMatterId = studentSubjectMatterModel.SubjectMatterId,
-            RecordGradeOne = studentSubjectMatterModel.RecordGradeOne,
-            RecordGradeTwo = studentSubjectMatterModel.RecordGradeTwo,
-            RecordGradeTotal = studentSubjectMatterModel.RecordGradeTotal
+            FirstGrade = studentSubjectMatterModel.FirstGrade,
+            SecondGrade = studentSubjectMatterModel.SecondGrade,
+            GradeTotal = studentSubjectMatterModel.GradeTotal
         };
     }
 
@@ -25,11 +25,11 @@ public static class StudentSubjectMatterMappers
         {
             StudentId = studentSubjectMatterRequest.StudentId,
             SubjectMatterId = studentSubjectMatterRequest.SubjectMatterId,
-            RecordGradeOne = studentSubjectMatterRequest.RecordGradeOne,
-            RecordGradeTwo = studentSubjectMatterRequest.RecordGradeTwo,
-            RecordGradeTotal = MathExtensions.Average(
-                [studentSubjectMatterRequest.RecordGradeOne,
-                studentSubjectMatterRequest.RecordGradeTwo])
+            FirstGrade = studentSubjectMatterRequest.FirstGrade,
+            SecondGrade = studentSubjectMatterRequest.SecondGrade,
+            GradeTotal = MathExtensions.Average(
+                [studentSubjectMatterRequest.FirstGrade,
+                studentSubjectMatterRequest.SecondGrade])
         };
     }
 }

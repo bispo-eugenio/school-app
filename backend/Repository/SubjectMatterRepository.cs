@@ -56,7 +56,8 @@ public class SubjectMatterRepository : ISubjectMatterRepository
 
         subjectMatterModel.Name = updateSubjectMatterRequest.Name;
         subjectMatterModel.Day = updateSubjectMatterRequest.Day;
-        subjectMatterModel.Hours = updateSubjectMatterRequest.Hours;
+        subjectMatterModel.StartedAt = updateSubjectMatterRequest.StartedAt;
+        subjectMatterModel.EndedAt = updateSubjectMatterRequest.EndedAt;
         subjectMatterModel.Details = updateSubjectMatterRequest.Details;
         subjectMatterModel.TeacherId = updateSubjectMatterRequest.TeacherId;
         await _context.SaveChangesAsync();

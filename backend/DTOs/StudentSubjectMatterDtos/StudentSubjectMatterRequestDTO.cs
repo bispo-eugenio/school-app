@@ -20,11 +20,11 @@ public class StudentSubjectMatterRequestDTO
     Description = "Enter the first grade.")]
     [Range(0, 10,
     ErrorMessage = "FirstGrade must be between 0 and 10.")]
-    public decimal RecordGradeOne { get; set; }
+    public decimal FirstGrade { get; set; }
     [Required(ErrorMessage = "SecondGrade is required.")]
     [Display(Name = "SecondGrade",
     Description = "Enter the second grade.")]
     [Range(0, 10,
     ErrorMessage = "SecondGrade must be between 0 and 10.")]
-    public decimal RecordGradeTwo { get; set; }
+    public decimal SecondGrade { get; set; }
 }

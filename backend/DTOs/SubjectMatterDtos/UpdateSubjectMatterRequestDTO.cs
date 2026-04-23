@@ -19,10 +19,14 @@ public class UpdateSubjectMatterRequestDTO
     [RegularExpression(@"^[a-zA-Z''-'\s]{6,9}$", ErrorMessage =
     "Day must contain only words (Monday, Friday, etc")]
     public string Day { get; set; } = "";
-    [Required(ErrorMessage = "Time is required.")]
-    [Display(Name = "Time", Description = "Enter the time's subject matter")]
+    [Required(ErrorMessage = "StartedAt is required.")]
+    [Display(Name = "Start time", Description = "Enter the started time's subject matter")]
     [DisplayFormat(DataFormatString = "00:00:00")]
-    public TimeSpan Hours { get; set; }
+    public TimeSpan StartedAt { get; set; }
+    [Required(ErrorMessage = "EndedAt is required.")]
+    [Display(Name = "End Time", Description = "Enter the ended time's subject matter")]
+    [DisplayFormat(DataFormatString = "00:00:00")]
+    public TimeSpan EndedAt { get; set; }
     [Required(ErrorMessage = "Subject matter details is required.")]
     [Display(Name = "Subject matter Details",
     Description = "Provide  a detailed description of the Subject matter.")]

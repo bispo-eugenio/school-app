@@ -9,10 +9,12 @@ public class SubjectMatter
     public Guid Register { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = "";
     [Column(TypeName = "ENUM('Monday', 'Tuesday', ' Wednesday'," +
-    " 'Thusday', 'Friday', 'Saturday', 'Sunday') DEFAULT 'Monday'")]
+    " 'Thusday', 'Friday', 'Saturday', 'Sunday', 'Undefined') DEFAULT 'Undefined'")]
     public string Day { get; set; } = "";
     [Column(TypeName = "TIME")]
-    public TimeSpan Hours { get; set; }
+    public TimeSpan StartedAt { get; set; }
+    [Column(TypeName = "TIME")]
+    public TimeSpan EndedAt { get; set; }
     [Column(TypeName = "TEXT")]
     public string Details { get; set; } = "";
     public DateTime CreatedOn { get; set; } = DateTime.Now;
