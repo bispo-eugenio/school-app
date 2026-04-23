@@ -22,7 +22,7 @@ public class SubjectMatterController : ControllerBase
         return Ok(subjectMatterModels);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         var subjectMatterModel = await _subjectMatterRepo.GetByIdAsync(id);
@@ -44,7 +44,7 @@ public class SubjectMatterController : ControllerBase
         return CreatedAtAction("GetById", new { id = subjectMatterModel.Id }, subjectMatterModel.ToDTO());
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateSubjectMatterRequestDTO updateSubjectMatterRequest)
     {
         var subjectMatterModel = await _subjectMatterRepo.UpdateAsync(id, updateSubjectMatterRequest);
@@ -55,7 +55,7 @@ public class SubjectMatterController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         var subjectMatterModel = await _subjectMatterRepo.DeleteAsync(id);

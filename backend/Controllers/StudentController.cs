@@ -23,7 +23,7 @@ public class StudentController : ControllerBase
         return Ok(studentModels);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         var studentModel = await _studentRepo.GetByIdAsync(id);
@@ -46,7 +46,7 @@ public class StudentController : ControllerBase
         return CreatedAtAction("GetById", new { id = studentModel.Id }, studentModel.ToDTO());
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStudentRequestDTO updateStudentRequest)
     {
         var studentModel = await _studentRepo.UpdateAsync(id, updateStudentRequest);
@@ -57,7 +57,7 @@ public class StudentController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         var studentModel = await _studentRepo.DeleteAsync(id);

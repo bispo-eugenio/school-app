@@ -24,7 +24,7 @@ public class CourseController : ControllerBase
         return Ok(courseModels);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         var courseModel = await _courseRepo.GetByIdAsync(id);
@@ -47,7 +47,7 @@ public class CourseController : ControllerBase
         return CreatedAtAction("GetById", new { id = courseModel.Id }, courseModel.ToDTO());
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCourseRequestDTO updateCourseRequest)
     {
         if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ public class CourseController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         var courseModel = await _courseRepo.DeleteAsync(id);

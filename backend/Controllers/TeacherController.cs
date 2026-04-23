@@ -25,7 +25,7 @@ public class TeacherController : ControllerBase
         return Ok(teacherModels);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         var teacherModel = await _teacherRepo.GetByIdAsync(id);
@@ -46,7 +46,7 @@ public class TeacherController : ControllerBase
         return CreatedAtAction("GetById", new { id = teacherModel.Id }, teacherModel.ToDTO());
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateTeacherRequestDTO updateTeacherRequest)
     {
         var teacherModel = await _teacherRepo.UpdateAsync(id, updateTeacherRequest);
@@ -57,7 +57,7 @@ public class TeacherController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         var teacherModel = await _teacherRepo.DeleteAsync(id);

@@ -24,7 +24,7 @@ public class ClassroomController : ControllerBase
         return Ok(classroomModels);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         var classroomModel = await _classroomRepo.GetByIdAsync(id);
@@ -47,7 +47,7 @@ public class ClassroomController : ControllerBase
         return CreatedAtAction("GetById", new { id = classroomModel.Id }, classroomModel.ToDTO());
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateClassroomRequestDTO updateClassroomRequest)
     {
         if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ public class ClassroomController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         var classroomModel = await _classroomRepo.DeleteAsync(id);
