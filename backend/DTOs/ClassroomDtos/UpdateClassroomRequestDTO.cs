@@ -6,13 +6,13 @@ public class UpdateClassroomRequestDTO
 {
     [Required(ErrorMessage = "Classroom name is required.")]
     [Display(Name = "Classroom Name", Description = "Enter the classroom name.")]
-    [MaxLength(100,
-    ErrorMessage = "Classroom name must not exceed 100 characters.")]
-    [MinLength(10,
-    ErrorMessage = "Classroom name must be at least 10 characters long.")]
-    [RegularExpression(@"^[a-zA-Z''-'\s]{10,100}$",
+    [MaxLength(10,
+    ErrorMessage = "Classroom name must not exceed 10 characters.")]
+    [MinLength(4,
+    ErrorMessage = "Classroom name must be at least 4 characters long.")]
+    [RegularExpression(@"^[A-Za-z]{1,5}-?[0-9]{1,4}[A-Za-z]?$",
     ErrorMessage =
-    "Classroom name must contain only letter and spaces")]
+    "Classroom name must contain only letter or numerics (LAB1, INFO-3, CLASS-43A, etc")]
     public string Name { get; set; } = "";
     [Required(ErrorMessage = "Subject Matter Id is required.")]
     [Display(Name = "SubjectMatter Id",

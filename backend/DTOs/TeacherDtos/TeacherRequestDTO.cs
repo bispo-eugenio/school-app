@@ -8,8 +8,8 @@ public class TeacherRequestDTO
     [Required(ErrorMessage = "Teacher name is required.")]
     [Display(Name = "Teacher Name", Description = "Enter the teacher's name.")]
     [MaxLength(100, ErrorMessage = "Teacher name must not exceed 100 characters.")]
-    [MinLength(10, ErrorMessage = "Teacher name must be at least 10 characters long")]
-    [RegularExpression(@"^[a-zA-Z''-'\s]{3,100}$", ErrorMessage =
+    [MinLength(3, ErrorMessage = "Teacher name must be at least 3 characters long")]
+    [RegularExpression(@"^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,100}$", ErrorMessage =
     "Name need to contains only letters and spaces.")]
     public string Name { get; set; } = "";
     [Required(ErrorMessage = "CPF is required.")]
@@ -19,7 +19,7 @@ public class TeacherRequestDTO
     public string Cpf { get; set; } = "";
     [Required(ErrorMessage = "Age is required.")]
     [Display(Name = "Teacher Age", Description = "Enter the teacher's age.")]
-    [Range(24, 140, ErrorMessage =
-    "Age must be between 24 and 140.")]
+    [Range(18, 140, ErrorMessage =
+    "Age must be between 18 and 140.")]
     public int Age { get; set; }
 }

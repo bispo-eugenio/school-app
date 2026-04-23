@@ -14,6 +14,7 @@ public static class SubjectMatterMappers
             Name = subjectMatterModel.Name,
             Day = subjectMatterModel.Day,
             StartedAt = subjectMatterModel.StartedAt,
+            EndedAt = subjectMatterModel.EndedAt,
             Details = subjectMatterModel.Details,
             CreatedOn = subjectMatterModel.CreatedOn,
             StudentSubjectMatters = subjectMatterModel.StudentSubjectMatters.Select(ss => ss.ToDTO()).ToList(),

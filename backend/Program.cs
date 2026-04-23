@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.MapScalarApiReference("/docs");
 }
 
 app.UseHttpsRedirection();

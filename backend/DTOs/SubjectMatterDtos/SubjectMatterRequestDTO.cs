@@ -10,9 +10,9 @@ public class SubjectMatterRequestDTO
     Description = "Enter the subject matter name.")]
     [MaxLength(100,
     ErrorMessage = "Subject matter must not exceed 100 characters.")]
-    [MinLength(10,
-    ErrorMessage = "Subject matter must be at least 10 characters long.")]
-    [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage =
+    [MinLength(3,
+    ErrorMessage = "Subject matter must be at least 3 characters long.")]
+    [RegularExpression(@"^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,100}$", ErrorMessage =
     "Name need to contains only letters and spaces.")]
     public string Name { get; set; } = "";
     [Required(ErrorMessage = "Day is required.")]
