@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using schoolApi.DTOs.CourseSubjectMatterDtos;
 using schoolApi.DTOs.StudentDtos;
 using schoolApi.DTOs.SubjectMatterDtos;
@@ -12,6 +13,7 @@ public class CourseDTO
     public string Name { get; set; } = "";
     public string Details { get; set; } = "";
     public DateTime CreatedOn { get; set; }
-    public List<StudentDTO> Students { get; set; } = [];
+    public List<StudentViewDTO> Students { get; set; } = [];
+    [JsonIgnore]
     public List<CourseSubjectMatterDTO> CourseSubjectMatters { get; set; } = [];
 }

@@ -11,5 +11,5 @@ public class TeacherDTO
     public string Cpf { get; set; } = "";
     public int Age { get; set; }
     public DateTime CreatedOn { get; set; }
-    public List<SubjectMatterDTO> SubjectMatters { get; set; } = [];
+    public List<SubjectMatterViewDTO> SubjectMatters { get; set; } = [];
 }

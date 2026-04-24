@@ -25,4 +25,15 @@ public static class ClassroomMappers
             SubjectMatterId = classroomRequest.SubjectMatterId
         };
     }
+
+    public static ClassroomViewDTO ToViewDTO(this Classroom classroomModel)
+    {
+        return new ClassroomViewDTO
+        {
+            Id = classroomModel.Id,
+            Register = classroomModel.Register,
+            Name = classroomModel.Name,
+        };
+    }
+
 }

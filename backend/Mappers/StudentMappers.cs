@@ -30,4 +30,17 @@ public static class StudentMappers
             CourseId = studentRequest.CourseId,
         };
     }
+
+    public static StudentViewDTO ToViewDTO(this Student studentModel)
+    {
+        return new StudentViewDTO
+        {
+            Id = studentModel.Id,
+            Register = studentModel.Register,
+            Name = studentModel.Name,
+            Cpf = studentModel.Cpf,
+            Age = studentModel.Age,
+            CourseId = studentModel.CourseId
+        };
+    }
 }

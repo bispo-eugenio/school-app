@@ -14,7 +14,7 @@ public static class CourseMappers
             Name = courseModel.Name,
             Details = courseModel.Details,
             CreatedOn = courseModel.CreatedOn,
-            Students = courseModel.Students.Select(s => s.ToDTO()).ToList(),
+            Students = courseModel.Students.Select(s => s.ToViewDTO()).ToList(),
             CourseSubjectMatters = courseModel.CourseSubjectMatters.Select(csm => csm.ToDTO()).ToList()
         };
     }

@@ -22,7 +22,7 @@ public class TeacherController : ControllerBase
         var teacherModels = await _teacherRepo.GetAllAsync();
         var teacherModelsDto = teacherModels.Select(t => t.ToDTO());
 
-        return Ok(teacherModels);
+        return Ok(teacherModelsDto);
     }
 
     [HttpGet("{id:int}")]

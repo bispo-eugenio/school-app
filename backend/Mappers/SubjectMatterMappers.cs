@@ -19,7 +19,7 @@ public static class SubjectMatterMappers
             CreatedOn = subjectMatterModel.CreatedOn,
             StudentSubjectMatters = subjectMatterModel.StudentSubjectMatters.Select(ss => ss.ToDTO()).ToList(),
             CourseSubjectMatters = subjectMatterModel.CourseSubjectMatters.Select(csm => csm.ToDTO()).ToList(),
-            Classroom = subjectMatterModel.Classroom,
+            Classroom = subjectMatterModel.Classroom?.ToViewDTO(),
             TeacherId = subjectMatterModel.TeacherId
         };
     }
@@ -36,4 +36,21 @@ public static class SubjectMatterMappers
             TeacherId = subjectMatterRequest.TeacherId
         };
     }
+
+    public static SubjectMatterViewDTO ToViewDTO(this SubjectMatter subjectMatterModel)
+    {
+        return new SubjectMatterViewDTO
+        {
+            Id = subjectMatterModel.Id,
+            Register = subjectMatterModel.Register,
+            Name = subjectMatterModel.Name,
+            Day = subjectMatterModel.Day,
+            StartedAt = subjectMatterModel.StartedAt,
+            EndedAt = subjectMatterModel.EndedAt,
+            Details = subjectMatterModel.Details,
+            Classroom = subjectMatterModel.Classroom?.ToViewDTO(),
+            TeacherId = subjectMatterModel.TeacherId
+        };
+    }
+
 }

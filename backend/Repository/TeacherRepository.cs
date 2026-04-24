@@ -30,12 +30,12 @@ public class TeacherRepository : ITeacherRepository
 
     public async Task<List<Teacher>> GetAllAsync()
     {
-        return await _context.Teacher.Include(t => t.SubjectMatters).ToListAsync();
+        return await _context.Teacher.Include(t => t.SubjectMatters).ThenInclude(s => s.Classroom).ToListAsync();
     }
 
     public async Task<Teacher?> GetByIdAsync(int id)
     {
-        return await _context.Teacher.Include(t => t.SubjectMatters).FirstOrDefaultAsync(t => t.Id == id);
+        return await _context.Teacher.Include(t => t.SubjectMatters).ThenInclude(s => s.Classroom).FirstOrDefaultAsync(t => t.Id == id);
     }
 
     public async Task<Teacher> PostAsync(Teacher teacher)

@@ -15,7 +15,7 @@ public static class TeacherMappers
             Cpf = teacherModel.Cpf,
             Age = teacherModel.Age,
             CreatedOn = teacherModel.CreatedOn,
-            SubjectMatters = teacherModel.SubjectMatters.Select(s => s.ToDTO()).ToList(),
+            SubjectMatters = teacherModel.SubjectMatters.Select(s => s.ToViewDTO()).ToList(),
         };
     }
 

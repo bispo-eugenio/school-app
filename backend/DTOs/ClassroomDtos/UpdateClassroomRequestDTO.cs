@@ -14,7 +14,6 @@ public class UpdateClassroomRequestDTO
     ErrorMessage =
     "Classroom name must contain only letter or numerics (LAB1, INFO-3, CLASS-43A, etc")]
     public string Name { get; set; } = "";
-    [Required(ErrorMessage = "Subject Matter Id is required.")]
     [Display(Name = "SubjectMatter Id",
     Description = "Select the subject matter Id.")]
     [Range(1, 999999,

@@ -21,7 +21,7 @@ public class CourseController : ControllerBase
         var courseModels = await _courseRepo.GetAllAsync();
         var courseModelsDto = courseModels.Select(c => c.ToDTO());
 
-        return Ok(courseModels);
+        return Ok(courseModelsDto);
     }
 
     [HttpGet("{id:int}")]
