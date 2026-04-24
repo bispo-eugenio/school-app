@@ -38,6 +38,15 @@ public class CourseRepository : ICourseRepository
         return await _context.Course.Include(c => c.Students).Include(c => c.CourseSubjectMatters).FirstOrDefaultAsync(c => c.Id == id);
     }
 
+    public async Task<List<SubjectMatter>> GetSubjectMattersByCourse(int id)
+    {
+        return await _context.SubjectMatter
+            .Where(sm => sm.CourseSubjectMatters.Any(csm => csm.CourseId == id))
+        .Include(sm => sm.CourseSubjectMatters)
+        .AsNoTracking()
+        .ToListAsync();
+    }
+
     public async Task<Course> PostAsync(Course course)
     {
 

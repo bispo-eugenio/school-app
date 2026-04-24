@@ -38,6 +38,16 @@ public class StudentRepository : IStudentRepository
         return await _context.Student.Include(s => s.StudentSubjectMatters).FirstOrDefaultAsync(s => s.Id == id);
     }
 
+    public async Task<List<SubjectMatter>> GetSubjectMattersByStudent(int id)
+    {
+        return await _context.SubjectMatter
+        .Where(sm => sm.StudentSubjectMatters.Any(ssm => ssm.StudentId == id))
+        .Include(sm => sm.StudentSubjectMatters)
+        .AsNoTracking()
+        .ToListAsync();
+    }
+
+
     public async Task<Student> PostAsync(Student student)
     {
 

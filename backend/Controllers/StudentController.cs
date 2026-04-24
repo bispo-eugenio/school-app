@@ -34,6 +34,13 @@ public class StudentController : ControllerBase
         return Ok(studentModel);
     }
 
+    [HttpGet("{id:int}/subjectMatter")]
+    public async Task<IActionResult> GetSubjectMatterByStudent([FromRoute] int id)
+    {
+        var subjectMatterModel = await _studentRepo.GetSubjectMattersByStudent(id);
+        return Ok(subjectMatterModel);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] StudentRequestDTO studentRequest)
     {

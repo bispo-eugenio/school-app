@@ -16,7 +16,7 @@ public class UpdateSubjectMatterRequestDTO
     public string Name { get; set; } = "";
     [Required(ErrorMessage = "Day is required.")]
     [Display(Name = "Day", Description = "Enter the day of the subject matter")]
-    [RegularExpression(@"^[a-zA-Z''-'\s]{6,9}$", ErrorMessage =
+    [RegularExpression(@"^[a-zA-Z''-'\s]{6,10}$", ErrorMessage =
     "Day must contain only words (Monday, Friday, etc")]
     public string Day { get; set; } = "";
     [Required(ErrorMessage = "StartedAt is required.")]
