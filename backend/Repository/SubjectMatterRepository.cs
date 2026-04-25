@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
 using schoolApi.Data;
 using schoolApi.DTOs.SubjectMatterDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Models;
 
 namespace schoolApi.Repository;
@@ -29,13 +31,38 @@ public class SubjectMatterRepository : ISubjectMatterRepository
     }
 
 
-    public async Task<List<SubjectMatter>> GetAllAsync()
+    public async Task<List<SubjectMatter>> GetAllAsync(SubjectMatterQueryable query)
     {
-        return await _context.SubjectMatter
+        var subjectMatterModel = _context.SubjectMatter
         .Include(s => s.StudentSubjectMatters)
         .Include(s => s.CourseSubjectMatters)
         .Include(s => s.Classroom)
-        .ToListAsync();
+        .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query.Name))
+            subjectMatterModel = subjectMatterModel
+            .Where(sm => sm.Name.Contains(query.Name));
+
+        if (!string.IsNullOrWhiteSpace(query.Day))
+            subjectMatterModel = subjectMatterModel
+            .Where(sm => sm.Day.Contains(query.Day));
+
+        if (query.StartedAt != null)
+            subjectMatterModel = subjectMatterModel
+            .Where(sm => sm.StartedAt.Equals(query.StartedAt));
+
+        if (query.EndedAt != null)
+            subjectMatterModel = subjectMatterModel
+            .Where(sm => sm.EndedAt.Equals(query.EndedAt));
+
+        if (query.TeacherId != null
+        && query.TeacherId.GetType() == typeof(int) && query.TeacherId >= 1)
+            subjectMatterModel = subjectMatterModel
+            .Where(s => s.TeacherId.Equals(query.TeacherId));
+
+
+        return await subjectMatterModel.ToListAsync();
+
     }
 
     public async Task<SubjectMatter?> GetByIdAsync(int id)

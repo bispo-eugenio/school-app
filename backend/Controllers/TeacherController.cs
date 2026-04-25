@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using schoolApi.Mappers;
 using schoolApi.DTOs.TeacherDtos;
 using Microsoft.EntityFrameworkCore;
+using schoolApi.Helpers.QueryableObjects;
 
 namespace schoolApi.Controllers;
 
@@ -17,9 +18,9 @@ public class TeacherController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] TeacherQueryable query)
     {
-        var teacherModels = await _teacherRepo.GetAllAsync();
+        var teacherModels = await _teacherRepo.GetAllAsync(query);
         var teacherModelsDto = teacherModels.Select(t => t.ToDTO());
 
         return Ok(teacherModelsDto);

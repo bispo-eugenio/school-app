@@ -1,11 +1,12 @@
 ﻿using schoolApi.DTOs.StudentDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Models;
 
 namespace schoolApi.Interfaces;
 
 public interface IStudentRepository
 {
-    public Task<List<Student>> GetAllAsync();
+    public Task<List<Student>> GetAllAsync(StudentQueryable query);
     public Task<Student?> GetByIdAsync(int id);
     public Task<List<SubjectMatter>> GetSubjectMattersByStudent(int id);
     public Task<Student> PostAsync(Student student);

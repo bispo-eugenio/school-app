@@ -4,6 +4,7 @@ using schoolApi.Dtos.StudentSubjectMatterDtos;
 using schoolApi.Interfaces;
 using schoolApi.Models;
 using schoolApi.Helpers;
+using schoolApi.Helpers.QueryableObjects;
 
 namespace schoolApi.Repository;
 
@@ -29,10 +30,24 @@ public class StudentSubjectMatterRepository : IStudentSubjectMatterRepository
 
     }
 
-
-    public async Task<List<StudentSubjectMatter>> GetAllAsync()
+    public async Task<List<StudentSubjectMatter>> GetAllAsync(StudentSubjectMatterQueryable query)
     {
-        return await _context.StudentSubjectMatter.ToListAsync();
+        var studentSubjectMatterModels = _context.StudentSubjectMatter.AsQueryable();
+
+        if (query.FirstGrade != null && query.FirstGrade.GetType() == typeof(decimal)
+        && query.FirstGrade >= 0)
+            studentSubjectMatterModels = studentSubjectMatterModels
+            .Where(ssm => ssm.FirstGrade.Equals(query.FirstGrade));
+        if (query.SecondGrade != null && query.SecondGrade.GetType() == typeof(decimal)
+        && query.SecondGrade >= 0)
+            studentSubjectMatterModels = studentSubjectMatterModels
+            .Where(ssm => ssm.SecondGrade.Equals(query.SecondGrade));
+        if (query.GradeTotal != null && query.GradeTotal.GetType() == typeof(decimal)
+        && query.GradeTotal >= 0)
+            studentSubjectMatterModels = studentSubjectMatterModels
+            .Where(ssm => ssm.GradeTotal.Equals(query.GradeTotal));
+
+        return await studentSubjectMatterModels.ToListAsync();
     }
 
     public async Task<StudentSubjectMatter?> GetByIdAsync(List<int> dualId)

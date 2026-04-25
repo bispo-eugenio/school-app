@@ -1,11 +1,12 @@
 ﻿using schoolApi.DTOs.SubjectMatterDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Models;
 
 namespace schoolApi;
 
 public interface ISubjectMatterRepository
 {
-    public Task<List<SubjectMatter>> GetAllAsync();
+    public Task<List<SubjectMatter>> GetAllAsync(SubjectMatterQueryable query);
     public Task<SubjectMatter?> GetByIdAsync(int id);
     public Task<List<Course>> GetCoursesBySubjectMatter(int id);
     public Task<List<Student>> GetStudentsBySubjectMatter(int id);

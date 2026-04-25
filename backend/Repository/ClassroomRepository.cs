@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using schoolApi.Data;
 using schoolApi.DTOs.ClassroomDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
 using schoolApi.Models;
 
@@ -28,9 +29,15 @@ public class ClassroomRepository : IClassroomRepository
     }
 
 
-    public async Task<List<Classroom>> GetAllAsync()
+    public async Task<List<Classroom>> GetAllAsync(ClassroomQueryable query)
     {
-        return await _context.Classroom.ToListAsync();
+        var classroomModel = _context.Classroom.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query.Name))
+            classroomModel = classroomModel.Where(c => c.Name.Contains(query.Name));
+
+        return await classroomModel.ToListAsync();
+
     }
 
     public async Task<Classroom?> GetByIdAsync(int id)

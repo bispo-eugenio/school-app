@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using schoolApi.Data;
 using schoolApi.DTOs.CourseDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
 using schoolApi.Models;
 
@@ -29,12 +30,17 @@ public class CourseRepository : ICourseRepository
     }
 
 
-    public async Task<List<Course>> GetAllAsync()
+    public async Task<List<Course>> GetAllAsync(CourseQueryable query)
     {
-        return await _context.Course
+        var courseModel = _context.Course
         .Include(c => c.Students)
         .Include(c => c.CourseSubjectMatters)
-        .ToListAsync();
+        .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query.Name))
+            courseModel = courseModel.Where(c => c.Name.Contains(query.Name));
+
+        return await courseModel.ToListAsync();
     }
 
     public async Task<Course?> GetByIdAsync(int id)

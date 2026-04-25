@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using schoolApi.DTOs.StudentDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
 using schoolApi.Mappers;
 
@@ -16,9 +17,9 @@ public class StudentController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] StudentQueryable query)
     {
-        var studentModels = await _studentRepo.GetAllAsync();
+        var studentModels = await _studentRepo.GetAllAsync(query);
         var studentModelsDto = studentModels.Select(s => s.ToDTO());
         return Ok(studentModels);
     }
@@ -34,7 +35,7 @@ public class StudentController : ControllerBase
         return Ok(studentModel);
     }
 
-    [HttpGet("{id:int}/subjectMatter")]
+    [HttpGet("{id:int}/subjectMatters")]
     public async Task<IActionResult> GetSubjectMatterByStudent([FromRoute] int id)
     {
         var subjectMatterModel = await _studentRepo.GetSubjectMattersByStudent(id);

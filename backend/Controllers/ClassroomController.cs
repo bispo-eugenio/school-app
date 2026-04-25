@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using schoolApi.DTOs.ClassroomDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
 using schoolApi.Mappers;
 
@@ -16,9 +17,9 @@ public class ClassroomController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] ClassroomQueryable query)
     {
-        var classroomModels = await _classroomRepo.GetAllAsync();
+        var classroomModels = await _classroomRepo.GetAllAsync(query);
         var classroomDto = classroomModels.Select(c => c.ToDTO());
 
         return Ok(classroomModels);

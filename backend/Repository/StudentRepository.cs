@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using schoolApi.Data;
 using schoolApi.DTOs.StudentDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
 using schoolApi.Models;
 
@@ -29,11 +31,24 @@ public class StudentRepository : IStudentRepository
     }
 
 
-    public async Task<List<Student>> GetAllAsync()
+    public async Task<List<Student>> GetAllAsync(StudentQueryable query)
     {
-        return await _context.Student
+        var studentModel = _context.Student
         .Include(s => s.StudentSubjectMatters)
-        .ToListAsync();
+        .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query.Name))
+            studentModel = studentModel.Where(s => s.Name.Contains(query.Name));
+
+        if (query.Age != null && query.Age.GetType() == typeof(int)
+        && query.Age >= 18)
+            studentModel = studentModel.Where(s => s.Age.Equals(query.Age));
+
+        if (query.CourseId != null && query.CourseId.GetType() == typeof(int)
+        && query.CourseId >= 1)
+            studentModel = studentModel.Where(s => s.CourseId.Equals(query.CourseId));
+
+        return await studentModel.ToListAsync();
     }
 
     public async Task<Student?> GetByIdAsync(int id)

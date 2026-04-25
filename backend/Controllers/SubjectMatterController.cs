@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using schoolApi.DTOs.SubjectMatterDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Mappers;
 namespace schoolApi.Controllers;
 
@@ -14,9 +15,9 @@ public class SubjectMatterController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] SubjectMatterQueryable query)
     {
-        var subjectMatterModels = await _subjectMatterRepo.GetAllAsync();
+        var subjectMatterModels = await _subjectMatterRepo.GetAllAsync(query);
         var subjectMatterModelsDto = subjectMatterModels.Select(s => s.ToDTO());
 
         return Ok(subjectMatterModelsDto);
@@ -32,14 +33,14 @@ public class SubjectMatterController : ControllerBase
         return Ok(subjectMatterModel);
     }
 
-    [HttpGet]
+    [HttpGet("{id:int}/courses")]
     public async Task<IActionResult> GetCoursesBySubjectMatter([FromRoute] int id)
     {
         var coursesModel = await _subjectMatterRepo.GetCoursesBySubjectMatter(id);
         return Ok(coursesModel);
     }
 
-    [HttpGet]
+    [HttpGet("{id:int}/students")]
     public async Task<IActionResult> GetStudentsBySubjectMatter([FromRoute] int id)
     {
         var studentsModel = await _subjectMatterRepo.GetCoursesBySubjectMatter(id);
