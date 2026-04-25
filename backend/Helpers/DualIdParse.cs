@@ -6,7 +6,7 @@ public static class DualIdParse
     {
         List<int> result = [];
         var array = dualId.Split("-").ToList();
-        if (array.Count != 2 &&
+        if (array.Count != 2 ||
         array.GetType() == typeof(List<int>))
             return null;
 

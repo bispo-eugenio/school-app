@@ -84,6 +84,9 @@ public class StudentSubjectMatterController : ControllerBase
 
         var studentSubjectMatterModel = await _studentSubjectMatterRepo.DeleteAsync(listId);
 
+        if (studentSubjectMatterModel == null)
+            return NotFound();
+
         return NoContent();
     }
 

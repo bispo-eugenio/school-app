@@ -8,10 +8,10 @@ namespace schoolApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CourseSubjectMatter : ControllerBase
+public class CourseSubjectMatterController : ControllerBase
 {
     private readonly ICourseSubjectMatterRepository _courseSubjectMatterRepo;
-    public CourseSubjectMatter(ICourseSubjectMatterRepository courseSubjectMatterRepo)
+    public CourseSubjectMatterController(ICourseSubjectMatterRepository courseSubjectMatterRepo)
     {
         _courseSubjectMatterRepo = courseSubjectMatterRepo;
     }
