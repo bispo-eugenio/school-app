@@ -5,6 +5,7 @@ using schoolApi.Interfaces;
 using schoolApi.Repository;
 using schoolApi;
 using Scalar.AspNetCore;
+using Newtonsoft.Json;
 
 DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>((options) =>
 {
     options.UseMySQL(ApplicationDbContext._connectionString);
+});
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
 });
 builder.Services.AddControllers();
 builder.Services.AddScoped<IClassroomRepository, ClassroomRepository>();
