@@ -16,7 +16,8 @@ public class CourseRepository : ICourseRepository
 
     public async Task<Course?> DeleteAsync(int id)
     {
-        var courseModel = await _context.Course.FirstOrDefaultAsync(c => c.Id == id);
+        var courseModel = await _context.Course
+        .FirstOrDefaultAsync(c => c.Id == id);
 
         if (courseModel == null)
             return courseModel;
@@ -30,12 +31,29 @@ public class CourseRepository : ICourseRepository
 
     public async Task<List<Course>> GetAllAsync()
     {
-        return await _context.Course.Include(c => c.Students).Include(c => c.CourseSubjectMatters).ToListAsync();
+        return await _context.Course
+        .Include(c => c.Students)
+        .Include(c => c.CourseSubjectMatters)
+        .ToListAsync();
     }
 
     public async Task<Course?> GetByIdAsync(int id)
     {
-        return await _context.Course.Include(c => c.Students).Include(c => c.CourseSubjectMatters).FirstOrDefaultAsync(c => c.Id == id);
+        return await _context.Course
+        .Include(c => c.Students)
+        .Include(c => c.CourseSubjectMatters)
+        .FirstOrDefaultAsync(c => c.Id == id);
+    }
+
+    public async Task<List<SubjectMatter>>
+    GetSubjectMattersByCourse(int id)
+    {
+        return await _context.SubjectMatter
+            .Where(sm => sm.CourseSubjectMatters
+                .Any(csm => csm.CourseId == id))
+        .Include(sm => sm.CourseSubjectMatters)
+        .AsNoTracking()
+        .ToListAsync();
     }
 
     public async Task<Course> PostAsync(Course course)
@@ -47,9 +65,11 @@ public class CourseRepository : ICourseRepository
         return course;
     }
 
-    public async Task<Course?> UpdateAsync(int id, UpdateCourseRequestDTO updateCourseRequest)
+    public async Task<Course?> UpdateAsync(int id,
+    UpdateCourseRequestDTO updateCourseRequest)
     {
-        var courseModel = await _context.Course.FirstOrDefaultAsync(c => c.Id == id);
+        var courseModel = await _context.Course
+        .FirstOrDefaultAsync(c => c.Id == id);
 
         if (courseModel == null)
             return courseModel;

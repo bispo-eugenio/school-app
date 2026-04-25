@@ -16,7 +16,8 @@ public class StudentRepository : IStudentRepository
 
     public async Task<Student?> DeleteAsync(int id)
     {
-        var studentModel = await _context.Student.FirstOrDefaultAsync(s => s.Id == id);
+        var studentModel = await _context.Student
+        .FirstOrDefaultAsync(s => s.Id == id);
 
         if (studentModel == null)
             return studentModel;
@@ -30,13 +31,29 @@ public class StudentRepository : IStudentRepository
 
     public async Task<List<Student>> GetAllAsync()
     {
-        return await _context.Student.Include(s => s.StudentSubjectMatters).ToListAsync();
+        return await _context.Student
+        .Include(s => s.StudentSubjectMatters)
+        .ToListAsync();
     }
 
     public async Task<Student?> GetByIdAsync(int id)
     {
-        return await _context.Student.Include(s => s.StudentSubjectMatters).FirstOrDefaultAsync(s => s.Id == id);
+        return await _context.Student
+        .Include(s => s.StudentSubjectMatters)
+        .FirstOrDefaultAsync(s => s.Id == id);
     }
+
+    public async Task<List<SubjectMatter>>
+    GetSubjectMattersByStudent(int id)
+    {
+        return await _context.SubjectMatter
+            .Where(sm => sm.StudentSubjectMatters
+                .Any(ssm => ssm.StudentId == id))
+        .Include(sm => sm.StudentSubjectMatters)
+        .AsNoTracking()
+        .ToListAsync();
+    }
+
 
     public async Task<Student> PostAsync(Student student)
     {
@@ -47,9 +64,11 @@ public class StudentRepository : IStudentRepository
         return student;
     }
 
-    public async Task<Student?> UpdateAsync(int id, UpdateStudentRequestDTO updateStudentRequest)
+    public async Task<Student?> UpdateAsync(int id,
+     UpdateStudentRequestDTO updateStudentRequest)
     {
-        var studentModel = await _context.Student.FirstOrDefaultAsync(s => s.Id == id);
+        var studentModel = await _context.Student
+        .FirstOrDefaultAsync(s => s.Id == id);
 
         if (studentModel == null)
             return studentModel;

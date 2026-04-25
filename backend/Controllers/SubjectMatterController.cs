@@ -19,7 +19,7 @@ public class SubjectMatterController : ControllerBase
         var subjectMatterModels = await _subjectMatterRepo.GetAllAsync();
         var subjectMatterModelsDto = subjectMatterModels.Select(s => s.ToDTO());
 
-        return Ok(subjectMatterModels);
+        return Ok(subjectMatterModelsDto);
     }
 
     [HttpGet("{id:int}")]
@@ -30,6 +30,20 @@ public class SubjectMatterController : ControllerBase
             return NotFound();
 
         return Ok(subjectMatterModel);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetCoursesBySubjectMatter([FromRoute] int id)
+    {
+        var coursesModel = await _subjectMatterRepo.GetCoursesBySubjectMatter(id);
+        return Ok(coursesModel);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetStudentsBySubjectMatter([FromRoute] int id)
+    {
+        var studentsModel = await _subjectMatterRepo.GetCoursesBySubjectMatter(id);
+        return Ok(studentsModel);
     }
 
     [HttpPost]

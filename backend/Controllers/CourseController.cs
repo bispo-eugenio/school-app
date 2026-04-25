@@ -35,6 +35,13 @@ public class CourseController : ControllerBase
         return Ok(courseModel);
     }
 
+    [HttpGet("{id:int}/subjectmatters")]
+    public async Task<IActionResult> GetSubjectMattersByCourse([FromRoute] int id)
+    {
+        var subjectMatterModel = await _courseRepo.GetSubjectMattersByCourse(id);
+        return Ok(subjectMatterModel);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CourseRequestDTO courseRequest)
     {

@@ -15,7 +15,8 @@ public class SubjectMatterRepository : ISubjectMatterRepository
 
     public async Task<SubjectMatter?> DeleteAsync(int id)
     {
-        var subjectMatterModel = await _context.SubjectMatter.FirstOrDefaultAsync(s => s.Id == id);
+        var subjectMatterModel = await _context.SubjectMatter
+        .FirstOrDefaultAsync(s => s.Id == id);
 
         if (subjectMatterModel == null)
             return subjectMatterModel;
@@ -30,13 +31,40 @@ public class SubjectMatterRepository : ISubjectMatterRepository
 
     public async Task<List<SubjectMatter>> GetAllAsync()
     {
-        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).Include(s => s.Classroom).ToListAsync();
+        return await _context.SubjectMatter
+        .Include(s => s.StudentSubjectMatters)
+        .Include(s => s.CourseSubjectMatters)
+        .Include(s => s.Classroom)
+        .ToListAsync();
     }
 
     public async Task<SubjectMatter?> GetByIdAsync(int id)
     {
-        return await _context.SubjectMatter.Include(s => s.StudentSubjectMatters).Include(s => s.CourseSubjectMatters).Include(s => s.Classroom).FirstOrDefaultAsync(s => s.Id == id);
+        return await _context.SubjectMatter
+        .Include(s => s.StudentSubjectMatters)
+        .Include(s => s.CourseSubjectMatters)
+        .Include(s => s.Classroom)
+        .FirstOrDefaultAsync(s => s.Id == id);
     }
+
+    public async Task<List<Course>> GetCoursesBySubjectMatter(int id)
+    {
+        return await _context.Course
+            .Where(c => c.CourseSubjectMatters
+                .Any(csm => csm.SubjectMatterId == id))
+        .AsNoTracking()
+        .ToListAsync();
+    }
+
+    public async Task<List<Student>> GetStudentsBySubjectMatter(int id)
+    {
+        return await _context.Student
+            .Where(s => s.StudentSubjectMatters
+                .Any(ssm => ssm.SubjectMatterId == id))
+        .AsNoTracking()
+        .ToListAsync();
+    }
+
 
     public async Task<SubjectMatter> PostAsync(SubjectMatter subjectMatter)
     {
@@ -47,9 +75,11 @@ public class SubjectMatterRepository : ISubjectMatterRepository
         return subjectMatter;
     }
 
-    public async Task<SubjectMatter?> UpdateAsync(int id, UpdateSubjectMatterRequestDTO updateSubjectMatterRequest)
+    public async Task<SubjectMatter?> UpdateAsync(int id,
+    UpdateSubjectMatterRequestDTO updateSubjectMatterRequest)
     {
-        var subjectMatterModel = await _context.SubjectMatter.FirstOrDefaultAsync(s => s.Id == id);
+        var subjectMatterModel = await _context.SubjectMatter
+        .FirstOrDefaultAsync(s => s.Id == id);
 
         if (subjectMatterModel == null)
             return subjectMatterModel;
