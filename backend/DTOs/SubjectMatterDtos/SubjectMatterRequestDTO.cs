@@ -15,20 +15,6 @@ public class SubjectMatterRequestDTO
     [RegularExpression(@"^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,100}$", ErrorMessage =
     "Name need to contains only letters and spaces.")]
     public string Name { get; set; } = "";
-    [Required(ErrorMessage = "Day is required.")]
-    [Display(Name = "Day", Description = "Enter the day of the subject matter")]
-    [RegularExpression(@"^[a-zA-Z''-'\s]{6,9}$", ErrorMessage =
-    "Day must contain only words (Monday, Friday, etc")]
-    public string Day { get; set; } = "";
-    [Required(ErrorMessage = "StartedAt is required.")]
-    [Display(Name = "Start time", Description = "Enter the started time's subject matter")]
-    [DisplayFormat(DataFormatString = "00:00:00")]
-    public TimeSpan StartedAt { get; set; }
-    [Required(ErrorMessage = "EndedAt is required.")]
-    [Display(Name = "End Time", Description = "Enter the ended time's subject matter")]
-    [DisplayFormat(DataFormatString = "00:00:00")]
-    public TimeSpan EndedAt { get; set; }
-    [Required(ErrorMessage = "Subject matter details is required.")]
     [Display(Name = "Subject matter Details",
     Description = "Provide  a detailed description of the Subject matter.")]
     [MaxLength(1000, ErrorMessage = "Subject matter detail must not exceed 1000 characters.")]

@@ -34,7 +34,7 @@ public class TeacherController : ControllerBase
         if (teacherModel == null)
             return NotFound();
 
-        return Ok(teacherModel);
+        return Ok(teacherModel.ToDTO());
     }
 
     [HttpPost]

@@ -3,6 +3,7 @@ using schoolApi.Mappers;
 using schoolApi.Helpers;
 using schoolApi.DTOs.CourseSubjectMatterDtos;
 using schoolApi.Interfaces;
+using schoolApi.Helpers.QueryableObjects;
 
 namespace schoolApi.Controllers;
 
@@ -17,9 +18,9 @@ public class CourseSubjectMatterController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] CourseSubjectMatterQueryable query)
     {
-        var courseSubjectMatterModel = await _courseSubjectMatterRepo.GetAllAsync();
+        var courseSubjectMatterModel = await _courseSubjectMatterRepo.GetAllAsync(query);
         var courseSubjectMatterModelDto = courseSubjectMatterModel.Select(c => c.ToDTO());
 
         return Ok(courseSubjectMatterModel);

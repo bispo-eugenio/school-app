@@ -22,7 +22,7 @@ public class ClassroomController : ControllerBase
         var classroomModels = await _classroomRepo.GetAllAsync(query);
         var classroomDto = classroomModels.Select(c => c.ToDTO());
 
-        return Ok(classroomModels);
+        return Ok(classroomDto);
     }
 
     [HttpGet("{id:int}")]
@@ -33,7 +33,7 @@ public class ClassroomController : ControllerBase
         if (classroomModel == null)
             return NotFound();
 
-        return Ok(classroomModel);
+        return Ok(classroomModel.ToDTO());
     }
 
     [HttpPost]

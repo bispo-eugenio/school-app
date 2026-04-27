@@ -9,7 +9,7 @@ public class Course
     public Guid Register { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = "";
     [Column(TypeName = "TEXT")]
-    public string Details { get; set; } = "";
+    public string? Details { get; set; }
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     public List<Student> Students { get; set; } = [];
     public List<CourseSubjectMatter> CourseSubjectMatters { get; set; } = [];

@@ -30,7 +30,7 @@ public class SubjectMatterController : ControllerBase
         if (subjectMatterModel == null)
             return NotFound();
 
-        return Ok(subjectMatterModel);
+        return Ok(subjectMatterModel.ToDTO());
     }
 
     [HttpGet("{id:int}/courses")]
