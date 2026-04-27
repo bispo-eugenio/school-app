@@ -38,14 +38,34 @@ public class StudentSubjectMatterRepository : IStudentSubjectMatterRepository
         && query.FirstGrade >= 0)
             studentSubjectMatterModels = studentSubjectMatterModels
             .Where(ssm => ssm.FirstGrade.Equals(query.FirstGrade));
+
         if (query.SecondGrade != null && query.SecondGrade.GetType() == typeof(decimal)
         && query.SecondGrade >= 0)
             studentSubjectMatterModels = studentSubjectMatterModels
             .Where(ssm => ssm.SecondGrade.Equals(query.SecondGrade));
+
         if (query.GradeTotal != null && query.GradeTotal.GetType() == typeof(decimal)
         && query.GradeTotal >= 0)
             studentSubjectMatterModels = studentSubjectMatterModels
             .Where(ssm => ssm.GradeTotal.Equals(query.GradeTotal));
+
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
+        {
+            if (query.SortBy.Equals("FirstGrade", StringComparison.OrdinalIgnoreCase))
+                studentSubjectMatterModels = query.IsDescending
+                ? studentSubjectMatterModels.OrderByDescending(ssm => ssm.FirstGrade)
+                : studentSubjectMatterModels.OrderBy(ssm => ssm.FirstGrade);
+
+            if (query.SortBy.Equals("SecondGrade", StringComparison.OrdinalIgnoreCase))
+                studentSubjectMatterModels = query.IsDescending
+                ? studentSubjectMatterModels.OrderByDescending(ssm => ssm.SecondGrade)
+                : studentSubjectMatterModels.OrderBy(ssm => ssm.SecondGrade);
+
+            if (query.SortBy.Equals("GradeTotal", StringComparison.OrdinalIgnoreCase))
+                studentSubjectMatterModels = query.IsDescending
+                ? studentSubjectMatterModels.OrderByDescending(ssm => ssm.GradeTotal)
+                : studentSubjectMatterModels.OrderBy(ssm => ssm.GradeTotal);
+        }
 
         return await studentSubjectMatterModels.ToListAsync();
     }

@@ -45,6 +45,19 @@ public class TeacherRepository : ITeacherRepository
         && query.Age >= 18)
             teacherModels = teacherModels.Where(t => t.Age.Equals(query.Age));
 
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
+        {
+            if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                teacherModels = query.IsDescending
+                ? teacherModels.OrderByDescending(t => t.Name)
+                : teacherModels.OrderBy(t => t.Name);
+
+            if (query.SortBy.Equals("Age", StringComparison.OrdinalIgnoreCase))
+                teacherModels = query.IsDescending
+                ? teacherModels.OrderByDescending(t => t.Age)
+                : teacherModels.OrderBy(t => t.Age);
+        }
+
         return await teacherModels.ToListAsync();
     }
 

@@ -49,6 +49,18 @@ public class SubjectMatterRepository : ISubjectMatterRepository
             subjectMatterModel = subjectMatterModel
             .Where(s => s.TeacherId.Equals(query.TeacherId));
 
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
+        {
+            if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                subjectMatterModel = query.IsDescending
+                ? subjectMatterModel.OrderByDescending(sm => sm.Name)
+                : subjectMatterModel.OrderBy(sm => sm.Name);
+
+            if (query.SortBy.Equals("TeacherId", StringComparison.OrdinalIgnoreCase))
+                subjectMatterModel = query.IsDescending
+                ? subjectMatterModel.OrderByDescending(sm => sm.TeacherId)
+                : subjectMatterModel.OrderBy(sm => sm.TeacherId);
+        }
 
         return await subjectMatterModel.ToListAsync();
 

@@ -39,6 +39,10 @@ public class ClassroomRepository : IClassroomRepository
         if (!string.IsNullOrWhiteSpace(query.Name))
             classroomModel = classroomModel.Where(c => c.Name.Contains(query.Name));
 
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
+            if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                classroomModel = query.IsDescending ? classroomModel.OrderByDescending(c => c.Name) : classroomModel.OrderBy(c => c.Name);
+
         return await classroomModel.ToListAsync();
 
     }

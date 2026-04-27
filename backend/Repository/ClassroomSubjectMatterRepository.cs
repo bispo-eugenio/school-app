@@ -32,23 +32,41 @@ public class ClassroomSubjectMatterRepository : IClassroomSubjectMatterRepositor
     public async Task<List<ClassroomSubjectMatter>>
     GetAllAsync(ClassroomSubjectMatterQueryable query)
     {
-        var classroomSubjectMatter = _context.ClassroomSubjectMatter
+        var classroomSubjectMatterModel = _context.ClassroomSubjectMatter
         .Include(csm => csm.Classroom)
         .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.Day))
-            classroomSubjectMatter = classroomSubjectMatter
+            classroomSubjectMatterModel = classroomSubjectMatterModel
             .Where(sm => sm.Day.Contains(query.Day));
 
         if (query.StartedAt != null)
-            classroomSubjectMatter = classroomSubjectMatter
+            classroomSubjectMatterModel = classroomSubjectMatterModel
             .Where(sm => sm.StartedAt.Equals(query.StartedAt));
 
         if (query.EndedAt != null)
-            classroomSubjectMatter = classroomSubjectMatter
+            classroomSubjectMatterModel = classroomSubjectMatterModel
             .Where(sm => sm.EndedAt.Equals(query.EndedAt));
 
-        return await classroomSubjectMatter.ToListAsync();
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
+        {
+            if (query.SortBy.Equals("Day", StringComparison.OrdinalIgnoreCase))
+                classroomSubjectMatterModel = query.IsDescending ?
+                classroomSubjectMatterModel.OrderByDescending(csm => csm.Day)
+                : classroomSubjectMatterModel.OrderBy(csm => csm.Day);
+
+            if (query.SortBy.Equals("StartedAt", StringComparison.OrdinalIgnoreCase))
+                classroomSubjectMatterModel = query.IsDescending ?
+                classroomSubjectMatterModel.OrderByDescending(csm => csm.StartedAt)
+                : classroomSubjectMatterModel.OrderBy(csm => csm.StartedAt);
+
+            if (query.SortBy.Equals("EndedAt", StringComparison.OrdinalIgnoreCase))
+                classroomSubjectMatterModel = query.IsDescending ?
+                classroomSubjectMatterModel.OrderByDescending(csm => csm.EndedAt)
+                : classroomSubjectMatterModel.OrderBy(csm => csm.EndedAt);
+        }
+
+        return await classroomSubjectMatterModel.ToListAsync();
     }
 
     public async Task<ClassroomSubjectMatter?> GetByIdAsync(List<int> dualId)

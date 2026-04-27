@@ -6,4 +6,6 @@ public class CourseSubjectMatterQueryable
     public int? WorkloadHours { get; set; } = null;
     public int? Semester { get; set; } = null;
     public bool? IsMandatory { get; set; } = null;
+    public string? SortBy { get; set; } = null;
+    public bool IsDescending { get; set; } = false;
 }

@@ -40,6 +40,12 @@ public class CourseRepository : ICourseRepository
         if (!string.IsNullOrWhiteSpace(query.Name))
             courseModel = courseModel.Where(c => c.Name.Contains(query.Name));
 
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
+            if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                courseModel = query.IsDescending ?
+                courseModel.OrderByDescending(c => c.Name)
+                : courseModel.OrderBy(c => c.Name);
+
         return await courseModel.ToListAsync();
     }
 

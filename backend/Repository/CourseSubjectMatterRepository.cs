@@ -53,6 +53,19 @@ public class CourseSubjectMatterRepository : ICourseSubjectMatterRepository
             courseSubjectMattersModel = courseSubjectMattersModel
             .Where(csm => csm.IsMandatory.Equals(query.IsMandatory));
 
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
+        {
+            if (query.SortBy.Equals("WorkloadHours", StringComparison.OrdinalIgnoreCase))
+                courseSubjectMattersModel = query.IsDescending
+                ? courseSubjectMattersModel.OrderByDescending(csm => csm.WorkloadHours)
+                : courseSubjectMattersModel.OrderBy(csm => csm);
+
+            if (query.SortBy.Equals("Semester", StringComparison.OrdinalIgnoreCase))
+                courseSubjectMattersModel = query.IsDescending
+                ? courseSubjectMattersModel.OrderByDescending(csm => csm.Semester)
+                : courseSubjectMattersModel.OrderBy(csm => csm.Semester);
+        }
+
         return await courseSubjectMattersModel.ToListAsync();
     }
 

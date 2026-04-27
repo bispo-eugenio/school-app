@@ -48,6 +48,28 @@ public class StudentRepository : IStudentRepository
         && query.CourseId >= 1)
             studentModel = studentModel.Where(s => s.CourseId.Equals(query.CourseId));
 
+        if(!string.IsNullOrWhiteSpace(query.SortBy))
+        {
+            if(query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+            {
+                studentModel = query.IsDescending
+                ? studentModel.OrderByDescending(s => s.Name)
+                : studentModel.OrderBy(s => s.Name);
+            }
+            if(query.SortBy.Equals("Age", StringComparison.OrdinalIgnoreCase))
+            {
+                studentModel = query.IsDescending
+                ? studentModel.OrderByDescending(s => s.Age)
+                : studentModel.OrderBy(s => s.Age);
+            }
+            if(query.SortBy.Equals("CourseId", StringComparison.OrdinalIgnoreCase))
+            {
+                studentModel = query.IsDescending
+                ? studentModel.OrderByDescending(s => s.CourseId)
+                : studentModel.OrderBy(s => s.CourseId);
+            }
+        }
+
         return await studentModel.ToListAsync();
     }
 
