@@ -12,14 +12,14 @@ public static class SubjectMatterMappers
             Id = subjectMatterModel.Id,
             Register = subjectMatterModel.Register,
             Name = subjectMatterModel.Name,
-            Day = subjectMatterModel.Day,
-            StartedAt = subjectMatterModel.StartedAt,
-            EndedAt = subjectMatterModel.EndedAt,
             Details = subjectMatterModel.Details,
             CreatedOn = subjectMatterModel.CreatedOn,
-            StudentSubjectMatters = subjectMatterModel.StudentSubjectMatters.Select(ss => ss.ToDTO()).ToList(),
-            CourseSubjectMatters = subjectMatterModel.CourseSubjectMatters.Select(csm => csm.ToDTO()).ToList(),
-            Classroom = subjectMatterModel.Classroom?.ToViewDTO(),
+            StudentSubjectMatters = subjectMatterModel.StudentSubjectMatters
+            .Select(ss => ss.ToDTO()).ToList(),
+            CourseSubjectMatters = subjectMatterModel.CourseSubjectMatters
+            .Select(csm => csm.ToDTO()).ToList(),
+            ClassroomSubjectMatters = subjectMatterModel.ClassroomSubjectMatters
+            .Select(csm => csm.ToViewDTO()).ToList(),
             TeacherId = subjectMatterModel.TeacherId
         };
     }
@@ -29,9 +29,6 @@ public static class SubjectMatterMappers
         return new SubjectMatter
         {
             Name = subjectMatterRequest.Name,
-            Day = subjectMatterRequest.Day,
-            StartedAt = subjectMatterRequest.StartedAt,
-            EndedAt = subjectMatterRequest.EndedAt,
             Details = subjectMatterRequest.Details,
             TeacherId = subjectMatterRequest.TeacherId
         };
@@ -44,11 +41,9 @@ public static class SubjectMatterMappers
             Id = subjectMatterModel.Id,
             Register = subjectMatterModel.Register,
             Name = subjectMatterModel.Name,
-            Day = subjectMatterModel.Day,
-            StartedAt = subjectMatterModel.StartedAt,
-            EndedAt = subjectMatterModel.EndedAt,
             Details = subjectMatterModel.Details,
-            Classroom = subjectMatterModel.Classroom?.ToViewDTO(),
+            ClassroomSubjectMatters = subjectMatterModel.ClassroomSubjectMatters
+            .Select(csm => csm.ToViewDTO()).ToList(),
             TeacherId = subjectMatterModel.TeacherId
         };
     }

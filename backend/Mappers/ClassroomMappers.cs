@@ -13,7 +13,8 @@ public static class ClassroomMappers
             Register = classroomModel.Register,
             Name = classroomModel.Name,
             CreatedOn = classroomModel.CreatedOn,
-            SubjectMatterId = classroomModel.SubjectMatterId
+            ClassroomSubjectMatters = classroomModel.ClassroomSubjectMatters
+            .Select(csm => csm.ToViewDTO()).ToList()
         };
     }
 
@@ -21,8 +22,7 @@ public static class ClassroomMappers
     {
         return new Classroom
         {
-            Name = classroomRequest.Name,
-            SubjectMatterId = classroomRequest.SubjectMatterId
+            Name = classroomRequest.Name
         };
     }
 

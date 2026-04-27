@@ -34,7 +34,8 @@ public class TeacherRepository : ITeacherRepository
     {
         var teacherModels = _context.Teacher
         .Include(t => t.SubjectMatters)
-        .ThenInclude(s => s.Classroom)
+        .ThenInclude(s => s.ClassroomSubjectMatters)
+        .ThenInclude(csm => csm.Classroom)
         .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.Name))
@@ -51,7 +52,8 @@ public class TeacherRepository : ITeacherRepository
     {
         return await _context.Teacher
         .Include(t => t.SubjectMatters)
-        .ThenInclude(s => s.Classroom)
+        .ThenInclude(s => s.ClassroomSubjectMatters)
+        .ThenInclude(csm => csm.Classroom)
         .FirstOrDefaultAsync(t => t.Id == id);
     }
 

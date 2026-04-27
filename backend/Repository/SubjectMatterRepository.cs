@@ -36,24 +36,13 @@ public class SubjectMatterRepository : ISubjectMatterRepository
         var subjectMatterModel = _context.SubjectMatter
         .Include(s => s.StudentSubjectMatters)
         .Include(s => s.CourseSubjectMatters)
-        .Include(s => s.Classroom)
+        .Include(s => s.ClassroomSubjectMatters)
+        .ThenInclude(csm => csm.Classroom)
         .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.Name))
             subjectMatterModel = subjectMatterModel
             .Where(sm => sm.Name.Contains(query.Name));
-
-        if (!string.IsNullOrWhiteSpace(query.Day))
-            subjectMatterModel = subjectMatterModel
-            .Where(sm => sm.Day.Contains(query.Day));
-
-        if (query.StartedAt != null)
-            subjectMatterModel = subjectMatterModel
-            .Where(sm => sm.StartedAt.Equals(query.StartedAt));
-
-        if (query.EndedAt != null)
-            subjectMatterModel = subjectMatterModel
-            .Where(sm => sm.EndedAt.Equals(query.EndedAt));
 
         if (query.TeacherId != null
         && query.TeacherId.GetType() == typeof(int) && query.TeacherId >= 1)
@@ -70,7 +59,8 @@ public class SubjectMatterRepository : ISubjectMatterRepository
         return await _context.SubjectMatter
         .Include(s => s.StudentSubjectMatters)
         .Include(s => s.CourseSubjectMatters)
-        .Include(s => s.Classroom)
+        .Include(s => s.ClassroomSubjectMatters)
+        .ThenInclude(csm => csm.Classroom)
         .FirstOrDefaultAsync(s => s.Id == id);
     }
 
@@ -92,7 +82,6 @@ public class SubjectMatterRepository : ISubjectMatterRepository
         .ToListAsync();
     }
 
-
     public async Task<SubjectMatter> PostAsync(SubjectMatter subjectMatter)
     {
 
@@ -112,9 +101,6 @@ public class SubjectMatterRepository : ISubjectMatterRepository
             return subjectMatterModel;
 
         subjectMatterModel.Name = updateSubjectMatterRequest.Name;
-        subjectMatterModel.Day = updateSubjectMatterRequest.Day;
-        subjectMatterModel.StartedAt = updateSubjectMatterRequest.StartedAt;
-        subjectMatterModel.EndedAt = updateSubjectMatterRequest.EndedAt;
         subjectMatterModel.Details = updateSubjectMatterRequest.Details;
         subjectMatterModel.TeacherId = updateSubjectMatterRequest.TeacherId;
         await _context.SaveChangesAsync();

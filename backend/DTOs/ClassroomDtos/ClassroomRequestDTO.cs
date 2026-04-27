@@ -14,9 +14,4 @@ public class ClassroomRequestDTO
     ErrorMessage =
     "Classroom name must contain only letter or numerics (LAB1, INFO-3, CLASS-43A, etc)")]
     public string Name { get; set; } = "";
-    [Display(Name = "SubjectMatter Id",
-    Description = "Select the subject matter Id.")]
-    [Range(1, 999999,
-    ErrorMessage = "Subject Matter Id must be between 1 and 999999.")]
-    public int? SubjectMatterId { get; set; } = null;
 }

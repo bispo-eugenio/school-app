@@ -17,7 +17,8 @@ public class ClassroomRepository : IClassroomRepository
 
     public async Task<Classroom?> DeleteAsync(int id)
     {
-        var classroomModel = await _context.Classroom.FirstOrDefaultAsync(c => c.Id == id);
+        var classroomModel = await _context.Classroom
+        .FirstOrDefaultAsync(c => c.Id == id);
 
         if (classroomModel == null)
             return classroomModel;
@@ -31,7 +32,9 @@ public class ClassroomRepository : IClassroomRepository
 
     public async Task<List<Classroom>> GetAllAsync(ClassroomQueryable query)
     {
-        var classroomModel = _context.Classroom.AsQueryable();
+        var classroomModel = _context.Classroom
+        .Include(c => c.ClassroomSubjectMatters)
+        .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.Name))
             classroomModel = classroomModel.Where(c => c.Name.Contains(query.Name));
@@ -42,7 +45,9 @@ public class ClassroomRepository : IClassroomRepository
 
     public async Task<Classroom?> GetByIdAsync(int id)
     {
-        return await _context.Classroom.FirstOrDefaultAsync(c => c.Id == id);
+        return await _context.Classroom
+        .Include(c => c.ClassroomSubjectMatters)
+        .FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<Classroom> PostAsync(Classroom classroom)
@@ -61,7 +66,6 @@ public class ClassroomRepository : IClassroomRepository
             return classroomModel;
 
         classroomModel.Name = updateClassroomRequest.Name;
-        classroomModel.SubjectMatterId = updateClassroomRequest.SubjectMatterId;
         await _context.SaveChangesAsync();
 
         return classroomModel;
