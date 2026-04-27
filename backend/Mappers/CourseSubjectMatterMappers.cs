@@ -11,6 +11,10 @@ public static class CourseSubjectMatterMappers
         {
             CourseId = courseSubjectMatter.CourseId,
             SubjectMatterId = courseSubjectMatter.SubjectMatterId,
+            IsActived = courseSubjectMatter.IsActived,
+            WorkloadHours = courseSubjectMatter.WorkloadHours,
+            Semester = courseSubjectMatter.Semester,
+            IsMandatory = courseSubjectMatter.IsMandatory
         };
     }
 
@@ -20,6 +24,10 @@ public static class CourseSubjectMatterMappers
         {
             CourseId = courseSubjectMatterRequest.CourseId,
             SubjectMatterId = courseSubjectMatterRequest.SubjectMatterId,
+            IsActived = courseSubjectMatterRequest.IsActived,
+            WorkloadHours = courseSubjectMatterRequest.WorkloadHours,
+            Semester = courseSubjectMatterRequest.Semester,
+            IsMandatory = courseSubjectMatterRequest.IsMandatory
         };
     }
 

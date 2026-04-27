@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using schoolApi.Data;
 using schoolApi.DTOs.CourseSubjectMatterDtos;
+using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
 using schoolApi.Models;
 
@@ -29,9 +30,30 @@ public class CourseSubjectMatterRepository : ICourseSubjectMatterRepository
     }
 
 
-    public async Task<List<CourseSubjectMatter>> GetAllAsync()
+    public async Task<List<CourseSubjectMatter>>
+    GetAllAsync(CourseSubjectMatterQueryable query)
     {
-        return await _context.CourseSubjectMatter.ToListAsync();
+        var courseSubjectMattersModel = _context.CourseSubjectMatter.AsQueryable();
+
+        if (query.IsActived != null)
+            courseSubjectMattersModel = courseSubjectMattersModel
+            .Where(csm => csm.IsActived.Equals(query.IsActived));
+
+        if (query.WorkloadHours != null
+        && query.WorkloadHours >= 0)
+            courseSubjectMattersModel = courseSubjectMattersModel
+            .Where(csm => csm.WorkloadHours.Equals(query.WorkloadHours));
+
+        if (query.Semester != null
+        && query.Semester >= 0)
+            courseSubjectMattersModel = courseSubjectMattersModel
+            .Where(csm => csm.Semester.Equals(query.Semester));
+
+        if (query.IsMandatory != null)
+            courseSubjectMattersModel = courseSubjectMattersModel
+            .Where(csm => csm.IsMandatory.Equals(query.IsMandatory));
+
+        return await courseSubjectMattersModel.ToListAsync();
     }
 
     public async Task<CourseSubjectMatter?> GetByIdAsync(List<int> dualId)

@@ -15,4 +15,24 @@ public class CourseSubjectMatterRequestDTO
     [Range(1, 999999,
     ErrorMessage = "Subject Matter ID must be between 1 and 999999.")]
     public int SubjectMatterId { get; set; }
+    [Required(ErrorMessage = "IsActived is required")]
+    [Display(Name = "Is Actived",
+    Description = "Enter the IsActived's CourseSubjectMatter.")]
+    [Range(0, 1, ErrorMessage = "IsActived must be between 0 and 1.")]
+    public int IsActived { get; set; }
+    [Required(ErrorMessage = "WordloadHours is required.")]
+    [Display(Name = "Workload Hours",
+    Description = "Enter the WorkloadHours's CourseSubjectMatter.")]
+    [Range(1, 100, ErrorMessage = "WorkloadHours must be between 1 and 100.")]
+    public int WorkloadHours { get; set; }
+    [Required(ErrorMessage = "Semester is required.")]
+    [Display(Name = "Semester",
+    Description = "Enter the Semester's CourseSubjectMatter.")]
+    [Range(1, 100, ErrorMessage = "Semester must be between 1 and 100.")]
+    public int Semester { get; set; }
+    [Required(ErrorMessage = "IsMandatory is required.")]
+    [Display(Name = "Is Mandatory",
+    Description = "Enter the IsMandatory's CourseSubjectMatter.")]
+    [Range(0, 1, ErrorMessage = "IsMandatory must be between 0 and 1.")]
+    public int IsMandatory { get; set; }
 }

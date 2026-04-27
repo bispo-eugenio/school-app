@@ -4,12 +4,33 @@ namespace schoolApi.DTOs.CourseSubjectMatterDtos;
 
 public class UpdateCourseSubjectMatterRequestDTO
 {
-    [Required(ErrorMessage = "CourseId is required.")]
-    [Display(Name = "Course Id", Description = "Please, input CourseId.")]
-    [Range(1, 999999)]
+    [Required(ErrorMessage = "Course ID is required.")]
+    [Display(Name = "CourseID", Description = "Select the course ID.")]
+    [Range(1, 999999,
+    ErrorMessage = "Course ID must be between 1 and 999999.")]
     public int CourseId { get; set; }
-    [Required(ErrorMessage = "SubjectMatterId is required.")]
-    [Display(Name = "SubjectMatter Id", Description = "Please, input SubjectMatterId.")]
-    [Range(1, 999999)]
+    [Required(ErrorMessage = "Subject Matter ID is required.")]
+    [Display(Name = "SubjectMatter ID",
+    Description = "Select the subject matter.")]
+    [Range(1, 999999,
+    ErrorMessage = "Subject Matter ID must be between 1 and 999999.")]
     public int SubjectMatterId { get; set; }
+    [Required(ErrorMessage = "IsActived is required")]
+    [Display(Name = "Is Actived",
+    Description = "Enter the IsActived's CourseSubjectMatter.")]
+    public bool IsActived { get; set; }
+    [Required(ErrorMessage = "WordloadHours is required.")]
+    [Display(Name = "Workload Hours",
+    Description = "Enter the WorkloadHours's CourseSubjectMatter.")]
+    [Range(1, 100, ErrorMessage = "WorkloadHours must be between 1 and 100.")]
+    public int WorkloadHours { get; set; }
+    [Required(ErrorMessage = "Semester is required.")]
+    [Display(Name = "Semester",
+    Description = "Enter the Semester's CourseSubjectMatter.")]
+    [Range(1, 100, ErrorMessage = "Semester must be between 1 and 100.")]
+    public int Semester { get; set; }
+    [Required(ErrorMessage = "IsMandatory is required.")]
+    [Display(Name = "Is Mandatory",
+    Description = "Enter the IsMandatory's CourseSubjectMatter.")]
+    public bool IsMandatory { get; set; }
 }
