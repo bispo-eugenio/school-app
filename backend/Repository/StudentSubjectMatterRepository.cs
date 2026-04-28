@@ -67,7 +67,12 @@ public class StudentSubjectMatterRepository : IStudentSubjectMatterRepository
                 : studentSubjectMatterModels.OrderBy(ssm => ssm.GradeTotal);
         }
 
-        return await studentSubjectMatterModels.ToListAsync();
+        var pageNum = (query.Page - 1) * query.PageSize;
+
+        return await studentSubjectMatterModels
+        .Skip(pageNum)
+        .Take(query.PageSize)
+        .ToListAsync();
     }
 
     public async Task<StudentSubjectMatter?> GetByIdAsync(List<int> dualId)

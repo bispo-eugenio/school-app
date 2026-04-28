@@ -58,7 +58,12 @@ public class TeacherRepository : ITeacherRepository
                 : teacherModels.OrderBy(t => t.Age);
         }
 
-        return await teacherModels.ToListAsync();
+        var pageNum = (query.Page - 1) * query.PageSize;
+
+        return await teacherModels
+        .Skip(pageNum)
+        .Take(query.PageSize)
+        .ToListAsync();
     }
 
     public async Task<Teacher?> GetByIdAsync(int id)

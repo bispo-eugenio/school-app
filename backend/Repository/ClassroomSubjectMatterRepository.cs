@@ -66,7 +66,12 @@ public class ClassroomSubjectMatterRepository : IClassroomSubjectMatterRepositor
                 : classroomSubjectMatterModel.OrderBy(csm => csm.EndedAt);
         }
 
-        return await classroomSubjectMatterModel.ToListAsync();
+        var pageNum = (query.Page - 1) * query.PageSize;
+
+        return await classroomSubjectMatterModel
+        .Skip(pageNum)
+        .Take(query.PageSize)
+        .ToListAsync();
     }
 
     public async Task<ClassroomSubjectMatter?> GetByIdAsync(List<int> dualId)

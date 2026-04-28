@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using schoolApi.Data;
 using schoolApi.DTOs.SubjectMatterDtos;
 using schoolApi.Helpers.QueryableObjects;
@@ -62,7 +61,12 @@ public class SubjectMatterRepository : ISubjectMatterRepository
                 : subjectMatterModel.OrderBy(sm => sm.TeacherId);
         }
 
-        return await subjectMatterModel.ToListAsync();
+        var pageNum = (query.Page - 1) * query.PageSize;
+
+        return await subjectMatterModel
+        .Skip(pageNum)
+        .Take(query.PageSize)
+        .ToListAsync();
 
     }
 

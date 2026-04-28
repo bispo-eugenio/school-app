@@ -48,21 +48,21 @@ public class StudentRepository : IStudentRepository
         && query.CourseId >= 1)
             studentModel = studentModel.Where(s => s.CourseId.Equals(query.CourseId));
 
-        if(!string.IsNullOrWhiteSpace(query.SortBy))
+        if (!string.IsNullOrWhiteSpace(query.SortBy))
         {
-            if(query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+            if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
             {
                 studentModel = query.IsDescending
                 ? studentModel.OrderByDescending(s => s.Name)
                 : studentModel.OrderBy(s => s.Name);
             }
-            if(query.SortBy.Equals("Age", StringComparison.OrdinalIgnoreCase))
+            if (query.SortBy.Equals("Age", StringComparison.OrdinalIgnoreCase))
             {
                 studentModel = query.IsDescending
                 ? studentModel.OrderByDescending(s => s.Age)
                 : studentModel.OrderBy(s => s.Age);
             }
-            if(query.SortBy.Equals("CourseId", StringComparison.OrdinalIgnoreCase))
+            if (query.SortBy.Equals("CourseId", StringComparison.OrdinalIgnoreCase))
             {
                 studentModel = query.IsDescending
                 ? studentModel.OrderByDescending(s => s.CourseId)
@@ -70,7 +70,12 @@ public class StudentRepository : IStudentRepository
             }
         }
 
-        return await studentModel.ToListAsync();
+        var pageNum = (query.Page - 1) * query.PageSize;
+
+        return await studentModel
+        .Skip(pageNum)
+        .Take(query.PageSize)
+        .ToListAsync();
     }
 
     public async Task<Student?> GetByIdAsync(int id)

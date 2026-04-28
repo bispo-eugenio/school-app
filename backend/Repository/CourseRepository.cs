@@ -46,7 +46,12 @@ public class CourseRepository : ICourseRepository
                 courseModel.OrderByDescending(c => c.Name)
                 : courseModel.OrderBy(c => c.Name);
 
-        return await courseModel.ToListAsync();
+        var pageNum = (query.Page - 1) * query.PageSize;
+
+        return await courseModel
+        .Skip(pageNum)
+        .Take(query.PageSize)
+        .ToListAsync();
     }
 
     public async Task<Course?> GetByIdAsync(int id)
