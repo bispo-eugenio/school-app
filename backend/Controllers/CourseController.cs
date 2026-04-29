@@ -10,16 +10,16 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class CourseController : ControllerBase
 {
-    private readonly ICourseRepository _courseRepo;
-    public CourseController(ICourseRepository courseRepository)
+    private readonly ICourseService _courseService;
+    public CourseController(ICourseService courseService)
     {
-        _courseRepo = courseRepository;
+        _courseService = courseService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] CourseQueryable query)
     {
-        var courseModels = await _courseRepo.GetAllAsync(query);
+        var courseModels = await _courseService.GetAll(query);
         var courseModelsDto = courseModels.Select(c => c.ToDTO());
 
         return Ok(courseModelsDto);
@@ -28,7 +28,7 @@ public class CourseController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var courseModel = await _courseRepo.GetByIdAsync(id);
+        var courseModel = await _courseService.GetById(id);
 
         if (courseModel == null)
             return NotFound();
@@ -39,7 +39,7 @@ public class CourseController : ControllerBase
     [HttpGet("{id:int}/subjectmatters")]
     public async Task<IActionResult> GetSubjectMattersByCourse([FromRoute] int id)
     {
-        var subjectMatterModel = await _courseRepo.GetSubjectMattersByCourse(id);
+        var subjectMatterModel = await _courseService.GetSubjectMattersByCourse(id);
         return Ok(subjectMatterModel);
     }
 
@@ -50,7 +50,7 @@ public class CourseController : ControllerBase
             return BadRequest(ModelState);
 
         var courseModel = courseRequest.ToCourse();
-        await _courseRepo.PostAsync(courseModel);
+        await _courseService.Create(courseModel);
 
         return CreatedAtAction("GetById", new { id = courseModel.Id }, courseModel.ToDTO());
     }
@@ -61,7 +61,7 @@ public class CourseController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var courseModel = await _courseRepo.UpdateAsync(id, updateCourseRequest);
+        var courseModel = await _courseService.Update(id, updateCourseRequest);
 
         if (courseModel == null)
             return NotFound();
@@ -72,7 +72,7 @@ public class CourseController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var courseModel = await _courseRepo.DeleteAsync(id);
+        var courseModel = await _courseService.Delete(id);
 
         if (courseModel == null)
             return NotFound();

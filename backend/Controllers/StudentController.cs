@@ -10,16 +10,16 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class StudentController : ControllerBase
 {
-    private readonly IStudentRepository _studentRepo;
-    public StudentController(IStudentRepository studentRepo)
+    private readonly IStudentService _studentService;
+    public StudentController(IStudentService studentService)
     {
-        _studentRepo = studentRepo;
+        _studentService = studentService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] StudentQueryable query)
     {
-        var studentModels = await _studentRepo.GetAllAsync(query);
+        var studentModels = await _studentService.GetAll(query);
         var studentModelsDto = studentModels.Select(s => s.ToDTO());
         return Ok(studentModels);
     }
@@ -27,7 +27,7 @@ public class StudentController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var studentModel = await _studentRepo.GetByIdAsync(id);
+        var studentModel = await _studentService.GetById(id);
 
         if (studentModel == null)
             return NotFound();
@@ -38,7 +38,7 @@ public class StudentController : ControllerBase
     [HttpGet("{id:int}/subjectMatters")]
     public async Task<IActionResult> GetSubjectMatterByStudent([FromRoute] int id)
     {
-        var subjectMatterModel = await _studentRepo.GetSubjectMattersByStudent(id);
+        var subjectMatterModel = await _studentService.GetSubjectMattersByStudent(id);
         return Ok(subjectMatterModel);
     }
 
@@ -49,7 +49,7 @@ public class StudentController : ControllerBase
             return BadRequest(ModelState);
 
         var studentModel = studentRequest.ToStudent();
-        await _studentRepo.PostAsync(studentModel);
+        await _studentService.Create(studentModel);
 
         return CreatedAtAction("GetById", new { id = studentModel.Id }, studentModel.ToDTO());
     }
@@ -57,7 +57,7 @@ public class StudentController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStudentRequestDTO updateStudentRequest)
     {
-        var studentModel = await _studentRepo.UpdateAsync(id, updateStudentRequest);
+        var studentModel = await _studentService.Update(id, updateStudentRequest);
 
         if (studentModel == null)
             return NotFound();
@@ -68,7 +68,7 @@ public class StudentController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var studentModel = await _studentRepo.DeleteAsync(id);
+        var studentModel = await _studentService.Delete(id);
 
         if (studentModel == null)
             return NotFound();

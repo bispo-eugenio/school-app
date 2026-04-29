@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using schoolApi.DTOs.SubjectMatterDtos;
 using schoolApi.Helpers.QueryableObjects;
+using schoolApi.Interfaces;
 using schoolApi.Mappers;
 namespace schoolApi.Controllers;
 
@@ -8,16 +9,16 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class SubjectMatterController : ControllerBase
 {
-    private readonly ISubjectMatterRepository _subjectMatterRepo;
-    public SubjectMatterController(ISubjectMatterRepository subjectMatterRepo)
+    private readonly ISubjectMatterService _subjectMatterService;
+    public SubjectMatterController(ISubjectMatterService subjectMatterService)
     {
-        _subjectMatterRepo = subjectMatterRepo;
+        _subjectMatterService = subjectMatterService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] SubjectMatterQueryable query)
     {
-        var subjectMatterModels = await _subjectMatterRepo.GetAllAsync(query);
+        var subjectMatterModels = await _subjectMatterService.GetAll(query);
         var subjectMatterModelsDto = subjectMatterModels.Select(s => s.ToDTO());
 
         return Ok(subjectMatterModelsDto);
@@ -26,7 +27,7 @@ public class SubjectMatterController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var subjectMatterModel = await _subjectMatterRepo.GetByIdAsync(id);
+        var subjectMatterModel = await _subjectMatterService.GetById(id);
         if (subjectMatterModel == null)
             return NotFound();
 
@@ -36,14 +37,14 @@ public class SubjectMatterController : ControllerBase
     [HttpGet("{id:int}/courses")]
     public async Task<IActionResult> GetCoursesBySubjectMatter([FromRoute] int id)
     {
-        var coursesModel = await _subjectMatterRepo.GetCoursesBySubjectMatter(id);
+        var coursesModel = await _subjectMatterService.GetCoursesBySubjectMatter(id);
         return Ok(coursesModel);
     }
 
     [HttpGet("{id:int}/students")]
     public async Task<IActionResult> GetStudentsBySubjectMatter([FromRoute] int id)
     {
-        var studentsModel = await _subjectMatterRepo.GetCoursesBySubjectMatter(id);
+        var studentsModel = await _subjectMatterService.GetCoursesBySubjectMatter(id);
         return Ok(studentsModel);
     }
 
@@ -54,7 +55,7 @@ public class SubjectMatterController : ControllerBase
             return BadRequest(ModelState);
 
         var subjectMatterModel = subjectMatterRequest.ToSubjectMatter();
-        await _subjectMatterRepo.PostAsync(subjectMatterModel);
+        await _subjectMatterService.Create(subjectMatterModel);
 
         return CreatedAtAction("GetById", new { id = subjectMatterModel.Id }, subjectMatterModel.ToDTO());
     }
@@ -62,7 +63,7 @@ public class SubjectMatterController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateSubjectMatterRequestDTO updateSubjectMatterRequest)
     {
-        var subjectMatterModel = await _subjectMatterRepo.UpdateAsync(id, updateSubjectMatterRequest);
+        var subjectMatterModel = await _subjectMatterService.Update(id, updateSubjectMatterRequest);
 
         if (subjectMatterModel == null)
             return NotFound();
@@ -73,7 +74,7 @@ public class SubjectMatterController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var subjectMatterModel = await _subjectMatterRepo.DeleteAsync(id);
+        var subjectMatterModel = await _subjectMatterService.Delete(id);
 
         if (subjectMatterModel == null)
             return NotFound();

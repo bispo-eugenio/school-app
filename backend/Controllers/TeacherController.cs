@@ -11,16 +11,16 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class TeacherController : ControllerBase
 {
-    private readonly ITeacherRepository _teacherRepo;
-    public TeacherController(ITeacherRepository teacherRepo)
+    private readonly ITeacherService _teacherService;
+    public TeacherController(ITeacherService teacherService)
     {
-        _teacherRepo = teacherRepo;
+        _teacherService = teacherService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] TeacherQueryable query)
     {
-        var teacherModels = await _teacherRepo.GetAllAsync(query);
+        var teacherModels = await _teacherService.GetAll(query);
         var teacherModelsDto = teacherModels.Select(t => t.ToDTO());
 
         return Ok(teacherModelsDto);
@@ -29,7 +29,7 @@ public class TeacherController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var teacherModel = await _teacherRepo.GetByIdAsync(id);
+        var teacherModel = await _teacherService.GetById(id);
 
         if (teacherModel == null)
             return NotFound();
@@ -42,7 +42,7 @@ public class TeacherController : ControllerBase
     {
 
         var teacherModel = teacherRequest.ToTeacher();
-        await _teacherRepo.PostAsync(teacherModel);
+        await _teacherService.Create(teacherModel);
 
         return CreatedAtAction("GetById", new { id = teacherModel.Id }, teacherModel.ToDTO());
     }
@@ -50,7 +50,7 @@ public class TeacherController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateTeacherRequestDTO updateTeacherRequest)
     {
-        var teacherModel = await _teacherRepo.UpdateAsync(id, updateTeacherRequest);
+        var teacherModel = await _teacherService.Update(id, updateTeacherRequest);
 
         if (teacherModel == null)
             return NotFound();
@@ -61,7 +61,7 @@ public class TeacherController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var teacherModel = await _teacherRepo.DeleteAsync(id);
+        var teacherModel = await _teacherService.Delete(id);
 
         if (teacherModel == null)
             return NotFound();

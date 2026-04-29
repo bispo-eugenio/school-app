@@ -11,16 +11,16 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class StudentSubjectMatterController : ControllerBase
 {
-    private readonly IStudentSubjectMatterRepository _studentSubjectMatterRepo;
-    public StudentSubjectMatterController(IStudentSubjectMatterRepository studentSubjectMatterRepo)
+    private readonly IStudentSubjectMatterService _studentSubjectMatterService;
+    public StudentSubjectMatterController(IStudentSubjectMatterService studentSubjectMatterService)
     {
-        _studentSubjectMatterRepo = studentSubjectMatterRepo;
+        _studentSubjectMatterService = studentSubjectMatterService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] StudentSubjectMatterQueryable query)
     {
-        var studentSubjectMatterModels = await _studentSubjectMatterRepo.GetAllAsync(query);
+        var studentSubjectMatterModels = await _studentSubjectMatterService.GetAll(query);
         var studentSubjectMatterModelsDto = studentSubjectMatterModels.Select(s => s.ToDTO());
         return Ok(studentSubjectMatterModels);
     }
@@ -33,7 +33,7 @@ public class StudentSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var studentSubjectMatterModel = await _studentSubjectMatterRepo.GetByIdAsync(listId);
+        var studentSubjectMatterModel = await _studentSubjectMatterService.GetById(listId);
 
         if (studentSubjectMatterModel == null)
             return NotFound();
@@ -48,7 +48,7 @@ public class StudentSubjectMatterController : ControllerBase
             return BadRequest(ModelState);
 
         var studentSubjectMatterModel = studentSubjectMatterRequest.ToStudentSubjectMatter();
-        await _studentSubjectMatterRepo.PostAsync(studentSubjectMatterModel);
+        await _studentSubjectMatterService.Create(studentSubjectMatterModel);
 
         return CreatedAtAction(
         "GetById",
@@ -67,7 +67,7 @@ public class StudentSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var studentSubjectMatterModel = await _studentSubjectMatterRepo.UpdateAsync(listId, updateStudentSubjectMatterRequest);
+        var studentSubjectMatterModel = await _studentSubjectMatterService.Update(listId, updateStudentSubjectMatterRequest);
 
         if (studentSubjectMatterModel == null)
             return NotFound();
@@ -83,7 +83,7 @@ public class StudentSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var studentSubjectMatterModel = await _studentSubjectMatterRepo.DeleteAsync(listId);
+        var studentSubjectMatterModel = await _studentSubjectMatterService.Delete(listId);
 
         if (studentSubjectMatterModel == null)
             return NotFound();

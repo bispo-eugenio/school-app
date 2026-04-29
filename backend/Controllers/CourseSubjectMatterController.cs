@@ -11,16 +11,16 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class CourseSubjectMatterController : ControllerBase
 {
-    private readonly ICourseSubjectMatterRepository _courseSubjectMatterRepo;
-    public CourseSubjectMatterController(ICourseSubjectMatterRepository courseSubjectMatterRepo)
+    private readonly ICourseSubjectMatterService _courseSubjectMatterService;
+    public CourseSubjectMatterController(ICourseSubjectMatterService courseSubjectMatterService)
     {
-        _courseSubjectMatterRepo = courseSubjectMatterRepo;
+        _courseSubjectMatterService = courseSubjectMatterService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] CourseSubjectMatterQueryable query)
     {
-        var courseSubjectMatterModel = await _courseSubjectMatterRepo.GetAllAsync(query);
+        var courseSubjectMatterModel = await _courseSubjectMatterService.GetAll(query);
         var courseSubjectMatterModelDto = courseSubjectMatterModel.Select(c => c.ToDTO());
 
         return Ok(courseSubjectMatterModel);
@@ -33,7 +33,7 @@ public class CourseSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var courseSubjectMatterModel = await _courseSubjectMatterRepo.GetByIdAsync(listId);
+        var courseSubjectMatterModel = await _courseSubjectMatterService.GetById(listId);
 
         if (courseSubjectMatterModel == null)
             return NotFound();
@@ -45,7 +45,7 @@ public class CourseSubjectMatterController : ControllerBase
     public async Task<IActionResult> Post([FromBody] CourseSubjectMatterRequestDTO courseSubjectMatterRequest)
     {
         var courseSubjectMatterModel = courseSubjectMatterRequest.ToCourseSubjectMatter();
-        await _courseSubjectMatterRepo.PostAsync(courseSubjectMatterModel);
+        await _courseSubjectMatterService.Create(courseSubjectMatterModel);
         return CreatedAtAction(
         "GetById",
         new
@@ -66,7 +66,7 @@ public class CourseSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var courseSubjectMatterModel = _courseSubjectMatterRepo.UpdateAsync(listId, updateCourseSubjectMatterRequest);
+        var courseSubjectMatterModel = _courseSubjectMatterService.Update(listId, updateCourseSubjectMatterRequest);
 
         if (courseSubjectMatterModel == null)
             return NotFound();
@@ -82,7 +82,7 @@ public class CourseSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var courseSubjectMatter = _courseSubjectMatterRepo.DeleteAsync(listId);
+        var courseSubjectMatter = _courseSubjectMatterService.Delete(listId);
 
         if (courseSubjectMatter == null)
             return NotFound();

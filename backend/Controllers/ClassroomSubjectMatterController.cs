@@ -11,10 +11,10 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class ClassroomSubjectMatterController : ControllerBase
 {
-    private readonly IClassroomSubjectMatterRepository _classroomSubjectMatterRepo;
-    public ClassroomSubjectMatterController(IClassroomSubjectMatterRepository classroomSubjectMatterRepo)
+    private readonly IClassroomSubjectMatterService _classroomSubjectMatterService;
+    public ClassroomSubjectMatterController(IClassroomSubjectMatterService classroomSubjectMatterService)
     {
-        _classroomSubjectMatterRepo = classroomSubjectMatterRepo;
+        _classroomSubjectMatterService = classroomSubjectMatterService;
     }
 
 
@@ -23,7 +23,7 @@ public class ClassroomSubjectMatterController : ControllerBase
     GetAll([FromQuery] ClassroomSubjectMatterQueryable query)
     {
         var classroomSubjectMatterModels =
-        await _classroomSubjectMatterRepo.GetAllAsync(query);
+        await _classroomSubjectMatterService.GetAll(query);
         var classroomSubjectMatterModelsDto =
         classroomSubjectMatterModels.Select(csm => csm.ToDTO());
 
@@ -39,7 +39,7 @@ public class ClassroomSubjectMatterController : ControllerBase
             return NotFound();
 
         var classroomSubjectMatterModel =
-        await _classroomSubjectMatterRepo.GetByIdAsync(listId);
+        await _classroomSubjectMatterService.GetById(listId);
 
         if (classroomSubjectMatterModel == null)
             return NotFound();
@@ -54,7 +54,7 @@ public class ClassroomSubjectMatterController : ControllerBase
     {
         var classroomSubjectMatterModel = classroomSubjectMatterRequest
         .ToClassroomSubjectMatter();
-        await _classroomSubjectMatterRepo.PostAsync(classroomSubjectMatterModel);
+        await _classroomSubjectMatterService.Create(classroomSubjectMatterModel);
 
         return CreatedAtAction("GetById",
             new
@@ -77,8 +77,8 @@ public class ClassroomSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var classroomSubjectMatterModel = _classroomSubjectMatterRepo
-        .UpdateAsync(listId, updateClassroomSubjectMatterRequest);
+        var classroomSubjectMatterModel = _classroomSubjectMatterService
+        .Update(listId, updateClassroomSubjectMatterRequest);
 
         if (classroomSubjectMatterModel == null)
             return NotFound();
@@ -94,8 +94,8 @@ public class ClassroomSubjectMatterController : ControllerBase
         if (listId == null)
             return NotFound();
 
-        var classroomSubjectMatterModel = _classroomSubjectMatterRepo
-        .DeleteAsync(listId);
+        var classroomSubjectMatterModel = _classroomSubjectMatterService
+        .Delete(listId);
 
         if (classroomSubjectMatterModel == null)
             return NotFound();

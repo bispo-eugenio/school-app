@@ -10,16 +10,16 @@ namespace schoolApi.Controllers;
 [ApiController]
 public class ClassroomController : ControllerBase
 {
-    private readonly IClassroomRepository _classroomRepo;
-    public ClassroomController(IClassroomRepository classroomRepo)
+    private readonly IClassroomService _classroomService;
+    public ClassroomController(IClassroomService classroomService)
     {
-        _classroomRepo = classroomRepo;
+        _classroomService = classroomService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] ClassroomQueryable query)
     {
-        var classroomModels = await _classroomRepo.GetAllAsync(query);
+        var classroomModels = await _classroomService.GetAll(query);
         var classroomDto = classroomModels.Select(c => c.ToDTO());
 
         return Ok(classroomDto);
@@ -28,7 +28,7 @@ public class ClassroomController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var classroomModel = await _classroomRepo.GetByIdAsync(id);
+        var classroomModel = await _classroomService.GetById(id);
 
         if (classroomModel == null)
             return NotFound();
@@ -43,7 +43,7 @@ public class ClassroomController : ControllerBase
             return BadRequest(ModelState);
 
         var classroomModel = classroomRequest.ToClassroom();
-        await _classroomRepo.PostAsync(classroomModel);
+        await _classroomService.Create(classroomModel);
 
         return CreatedAtAction("GetById", new { id = classroomModel.Id }, classroomModel.ToDTO());
     }
@@ -54,7 +54,7 @@ public class ClassroomController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var classroomModel = await _classroomRepo.UpdateAsync(id, updateClassroomRequest);
+        var classroomModel = await _classroomService.Update(id, updateClassroomRequest);
 
         if (classroomModel == null)
             return NotFound();
@@ -65,7 +65,7 @@ public class ClassroomController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var classroomModel = await _classroomRepo.DeleteAsync(id);
+        var classroomModel = await _classroomService.Delete(id);
 
         if (classroomModel == null)
             return NotFound();
