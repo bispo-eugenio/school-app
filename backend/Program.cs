@@ -4,7 +4,6 @@ using dotenv.net;
 using schoolApi.Interfaces;
 using schoolApi.Repository;
 using schoolApi;
-using Scalar.AspNetCore;
 using Newtonsoft.Json;
 using FluentValidation;
 using schoolApi.Helpers.Validators;
@@ -13,21 +12,27 @@ using schoolApi.Services;
 DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+//Doc
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+
+//Database
 builder.Services.AddDbContext<ApplicationDbContext>((options) =>
 {
     options.UseMySQL(ApplicationDbContext._connectionString);
 });
+
+//Newtonsoft
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
 });
+
+//Controllers
 builder.Services.AddControllers();
 
+//Builder Validations
 builder.Services.AddValidatorsFromAssemblyContaining<CourseValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<StudentValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<SubjectMatterValidator>();
@@ -37,6 +42,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<ClassroomSubjectMatterValid
 builder.Services.AddValidatorsFromAssemblyContaining<CourseSubjectMatterValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<StudentSubjectMatterValidator>();
 
+//Builder Repositories
 builder.Services.AddScoped<IClassroomRepository, ClassroomRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
@@ -46,6 +52,7 @@ builder.Services.AddScoped<IClassroomSubjectMatterRepository, ClassroomSubjectMa
 builder.Services.AddScoped<ISubjectMatterRepository, SubjectMatterRepository>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 
+//Builder Services
 builder.Services.AddScoped<IClassroomService, ClassroomService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
@@ -62,10 +69,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.MapOpenApi();
-    app.MapScalarApiReference("/docs");
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-app.MapGet("/", () => "Hello World!");
 app.MapControllers();
 app.Run();
