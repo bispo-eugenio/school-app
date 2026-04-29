@@ -9,7 +9,7 @@ public interface IClassroomSubjectMatterRepository
     public Task<List<ClassroomSubjectMatter>> GetAllAsync(ClassroomSubjectMatterQueryable query);
     public Task<ClassroomSubjectMatter?> GetByIdAsync(List<int> dualId);
     public Task<ClassroomSubjectMatter>
-    PostAsync(ClassroomSubjectMatter course);
+    PostAsync(ClassroomSubjectMatter classroomSubjectMatter);
     public Task<ClassroomSubjectMatter?> UpdateAsync(List<int> dualId,
     UpdateClassroomSubjectMatterRequestDTO
     updateClassroomSubjectMatterRequest);

@@ -8,4 +8,5 @@ public class CourseSubjectMatterDTO
     public int WorkloadHours { get; set; }
     public int Semester { get; set; }
     public int IsMandatory { get; set; }
+    public string? Details { get; set; }
 }

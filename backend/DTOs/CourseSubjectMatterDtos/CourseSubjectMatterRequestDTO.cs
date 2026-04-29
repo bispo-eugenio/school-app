@@ -35,4 +35,13 @@ public class CourseSubjectMatterRequestDTO
     Description = "Enter the IsMandatory's CourseSubjectMatter.")]
     [Range(0, 1, ErrorMessage = "IsMandatory must be between 0 and 1.")]
     public int IsMandatory { get; set; }
+    [Display(Name = "Course Subject Matter Details",
+    Description = "Provide a detailed description of the course subject matter.")]
+    [MaxLength(1000,
+    ErrorMessage = "Course subject matter detail" +
+    " must not exceed 1000 characters.")]
+    [MinLength(10,
+    ErrorMessage = "Course subject matter detail" +
+    " must be at least 10 character long.")]
+    public string? Details { get; set; }
 }

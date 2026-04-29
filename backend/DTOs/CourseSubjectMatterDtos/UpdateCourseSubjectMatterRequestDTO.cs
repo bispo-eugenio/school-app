@@ -18,7 +18,8 @@ public class UpdateCourseSubjectMatterRequestDTO
     [Required(ErrorMessage = "IsActived is required")]
     [Display(Name = "Is Actived",
     Description = "Enter the IsActived's CourseSubjectMatter.")]
-    public bool IsActived { get; set; }
+    [Range(0, 1, ErrorMessage = "IsActived must be between 0 and 1.")]
+    public int IsActived { get; set; }
     [Required(ErrorMessage = "WordloadHours is required.")]
     [Display(Name = "Workload Hours",
     Description = "Enter the WorkloadHours's CourseSubjectMatter.")]
@@ -32,5 +33,15 @@ public class UpdateCourseSubjectMatterRequestDTO
     [Required(ErrorMessage = "IsMandatory is required.")]
     [Display(Name = "Is Mandatory",
     Description = "Enter the IsMandatory's CourseSubjectMatter.")]
-    public bool IsMandatory { get; set; }
+    [Range(0, 1, ErrorMessage = "IsMandatory must be between 0 and 1.")]
+    public int IsMandatory { get; set; }
+    [Display(Name = "Course Subject Matter Details",
+    Description = "Provide a detailed description of the course subject matter.")]
+    [MaxLength(1000,
+    ErrorMessage = "Course subject matter detail" +
+    " must not exceed 1000 characters.")]
+    [MinLength(10,
+    ErrorMessage = "Course subject matter detail" +
+    " must be at least 10 character long.")]
+    public string? Details { get; set; }
 }

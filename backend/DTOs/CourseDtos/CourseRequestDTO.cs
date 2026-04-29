@@ -14,7 +14,7 @@ public class CourseRequestDTO
     "Course name must contain only letters e spaces.")]
     public string Name { get; set; } = "";
     [Display(Name = "Course Details",
-    Description = "Provide  a detailed description of the course.")]
+    Description = "Provide a detailed description of the course.")]
     [MaxLength(1000, ErrorMessage = "Course detail must not exceed 1000 characters.")]
     [MinLength(10, ErrorMessage = "Course detail must be at least 10 character long.")]
     public string? Details { get; set; }
