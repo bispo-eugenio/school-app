@@ -28,4 +28,13 @@ public static class CourseMappers
         };
     }
 
+    public static Course ToCourse(this UpdateCourseRequestDTO updateCourseRequest)
+    {
+        return new Course
+        {
+            Name = updateCourseRequest.Name,
+            Details = updateCourseRequest.Details,
+        };
+    }
+
 }

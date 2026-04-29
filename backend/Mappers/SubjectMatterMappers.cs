@@ -24,13 +24,25 @@ public static class SubjectMatterMappers
         };
     }
 
-    public static SubjectMatter ToSubjectMatter(this SubjectMatterRequestDTO subjectMatterRequest)
+    public static SubjectMatter
+    ToSubjectMatter(this SubjectMatterRequestDTO subjectMatterRequest)
     {
         return new SubjectMatter
         {
             Name = subjectMatterRequest.Name,
             Details = subjectMatterRequest.Details,
             TeacherId = subjectMatterRequest.TeacherId
+        };
+    }
+
+    public static SubjectMatter
+    ToSubjectMatter(this UpdateSubjectMatterRequestDTO updateSubjectMatterRequestDTO)
+    {
+        return new SubjectMatter
+        {
+            Name = updateSubjectMatterRequestDTO.Name,
+            Details = updateSubjectMatterRequestDTO.Details,
+            TeacherId = updateSubjectMatterRequestDTO.TeacherId
         };
     }
 

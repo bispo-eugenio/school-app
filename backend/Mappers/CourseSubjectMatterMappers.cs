@@ -14,7 +14,8 @@ public static class CourseSubjectMatterMappers
             IsActived = courseSubjectMatter.IsActived,
             WorkloadHours = courseSubjectMatter.WorkloadHours,
             Semester = courseSubjectMatter.Semester,
-            IsMandatory = courseSubjectMatter.IsMandatory
+            IsMandatory = courseSubjectMatter.IsMandatory,
+            Details = courseSubjectMatter.Details
         };
     }
 
@@ -27,7 +28,23 @@ public static class CourseSubjectMatterMappers
             IsActived = courseSubjectMatterRequest.IsActived,
             WorkloadHours = courseSubjectMatterRequest.WorkloadHours,
             Semester = courseSubjectMatterRequest.Semester,
-            IsMandatory = courseSubjectMatterRequest.IsMandatory
+            IsMandatory = courseSubjectMatterRequest.IsMandatory,
+            Details = courseSubjectMatterRequest.Details
+        };
+    }
+
+    public static CourseSubjectMatter ToCourseSubjectMatter
+    (this UpdateCourseSubjectMatterRequestDTO updateCourseSubjectMatterRequest)
+    {
+        return new CourseSubjectMatter
+        {
+            CourseId = updateCourseSubjectMatterRequest.CourseId,
+            SubjectMatterId = updateCourseSubjectMatterRequest.SubjectMatterId,
+            IsActived = updateCourseSubjectMatterRequest.IsActived,
+            WorkloadHours = updateCourseSubjectMatterRequest.WorkloadHours,
+            Semester = updateCourseSubjectMatterRequest.Semester,
+            IsMandatory = updateCourseSubjectMatterRequest.IsMandatory,
+            Details = updateCourseSubjectMatterRequest.Details
         };
     }
 

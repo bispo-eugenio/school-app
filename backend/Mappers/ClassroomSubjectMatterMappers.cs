@@ -38,6 +38,21 @@ public static class ClassroomSubjectMatterMappers
         };
     }
 
+    public static ClassroomSubjectMatter
+    ToClassroomSubjectMatter(
+    this UpdateClassroomSubjectMatterRequestDTO updateClassroomSubjectMatterRequest)
+    {
+        return new ClassroomSubjectMatter
+        {
+            ClassroomId = updateClassroomSubjectMatterRequest.ClassroomId,
+            SubjectMatterId = updateClassroomSubjectMatterRequest.SubjectMatterId,
+            Day = updateClassroomSubjectMatterRequest.Day,
+            StartedAt = updateClassroomSubjectMatterRequest.StartedAt,
+            EndedAt = updateClassroomSubjectMatterRequest.EndedAt,
+            Details = updateClassroomSubjectMatterRequest.Details,
+        };
+    }
+
     public static ClassroomSubjectMatterViewDTO
     ToViewDTO(this ClassroomSubjectMatter classroomSubjectMatterModel)
     {

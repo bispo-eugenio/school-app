@@ -26,6 +26,14 @@ public static class ClassroomMappers
         };
     }
 
+    public static Classroom ToClassroom(this UpdateClassroomRequestDTO updateClassroomRequest)
+    {
+        return new Classroom
+        {
+            Name = updateClassroomRequest.Name
+        };
+    }
+
     public static ClassroomViewDTO ToViewDTO(this Classroom classroomModel)
     {
         return new ClassroomViewDTO

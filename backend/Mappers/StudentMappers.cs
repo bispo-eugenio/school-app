@@ -31,6 +31,18 @@ public static class StudentMappers
         };
     }
 
+
+    public static Student ToStudent(this UpdateStudentRequestDTO updateStudentRequest)
+    {
+        return new Student
+        {
+            Name = updateStudentRequest.Name,
+            Cpf = updateStudentRequest.Cpf,
+            Age = updateStudentRequest.Age,
+            CourseId = updateStudentRequest.CourseId,
+        };
+    }
+
     public static StudentViewDTO ToViewDTO(this Student studentModel)
     {
         return new StudentViewDTO

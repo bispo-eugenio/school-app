@@ -6,7 +6,8 @@ namespace schoolApi.Mappers;
 
 public static class StudentSubjectMatterMappers
 {
-    public static StudentSubjectMatterDTO ToDTO(this StudentSubjectMatter studentSubjectMatterModel)
+    public static StudentSubjectMatterDTO
+    ToDTO(this StudentSubjectMatter studentSubjectMatterModel)
     {
         return new StudentSubjectMatterDTO
         {
@@ -19,7 +20,9 @@ public static class StudentSubjectMatterMappers
         };
     }
 
-    public static StudentSubjectMatter ToStudentSubjectMatter(this StudentSubjectMatterRequestDTO studentSubjectMatterRequest)
+    public static StudentSubjectMatter
+    ToStudentSubjectMatter(this StudentSubjectMatterRequestDTO
+    studentSubjectMatterRequest)
     {
         return new StudentSubjectMatter
         {
@@ -30,6 +33,23 @@ public static class StudentSubjectMatterMappers
             GradeTotal = MathExtensions.Average(
                 [studentSubjectMatterRequest.FirstGrade,
                 studentSubjectMatterRequest.SecondGrade])
+        };
+    }
+
+
+    public static StudentSubjectMatter
+    ToStudentSubjectMatter(this UpdateStudentSubjectMatterRequestDTO
+    updateStudentSubjectMatterRequest)
+    {
+        return new StudentSubjectMatter
+        {
+            StudentId = updateStudentSubjectMatterRequest.StudentId,
+            SubjectMatterId = updateStudentSubjectMatterRequest.SubjectMatterId,
+            FirstGrade = updateStudentSubjectMatterRequest.FirstGrade,
+            SecondGrade = updateStudentSubjectMatterRequest.SecondGrade,
+            GradeTotal = MathExtensions.Average(
+                [updateStudentSubjectMatterRequest.FirstGrade,
+                updateStudentSubjectMatterRequest.SecondGrade])
         };
     }
 }

@@ -28,4 +28,15 @@ public static class TeacherMappers
             Age = teacherRequest.Age,
         };
     }
+
+    public static Teacher ToTeacher(this UpdateTeacherRequestDTO updateTeacherRequest)
+    {
+        return new Teacher
+        {
+            Name = updateTeacherRequest.Name,
+            Cpf = updateTeacherRequest.Cpf,
+            Age = updateTeacherRequest.Age,
+        };
+    }
+
 }
