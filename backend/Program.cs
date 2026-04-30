@@ -19,7 +19,12 @@ builder.Services.AddSwaggerGen();
 //Database
 builder.Services.AddDbContext<ApplicationDbContext>((options) =>
 {
-    options.UseMySQL(ApplicationDbContext._connectionString);
+    options.UseMySQL($"""
+        Server={Environment.GetEnvironmentVariable("SERVER")};
+        User ID={Environment.GetEnvironmentVariable("USERID")};
+        Password={Environment.GetEnvironmentVariable("PASSWORD")};
+        Database={Environment.GetEnvironmentVariable("DATABASE")}
+    """);
 });
 
 //Newtonsoft
