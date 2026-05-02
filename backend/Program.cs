@@ -8,6 +8,11 @@ using Newtonsoft.Json;
 using FluentValidation;
 using schoolApi.Helpers.Validators;
 using schoolApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using schoolApi.Models;
+using Microsoft.AspNetCore.Identity;
 
 DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +38,35 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
 });
+
+//JWT
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (
+            Encoding.UTF8.GetBytes($"{builder.Configuration["JWT:SigingKey"]}")
+        ),
+    };
+});
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 12;
+    options.Password.RequiredUniqueChars = 4;
+    options.Password.RequireLowercase = true;
+}).AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddAuthorization();
 
 //Controllers
 builder.Services.AddControllers();
@@ -66,6 +100,7 @@ builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IClassroomSubjectMatterService, ClassroomSubjectMatterService>();
 builder.Services.AddScoped<ICourseSubjectMatterService, CourseSubjectMatterService>();
 builder.Services.AddScoped<IStudentSubjectMatterService, StudentSubjectMatterService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
@@ -78,5 +113,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 app.Run();
