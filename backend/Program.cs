@@ -13,13 +13,42 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using schoolApi.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi;
 
 DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 //Doc
 builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc(
+        "v1",
+        new OpenApiInfo
+        {
+            Title = "Demo API",
+            Version = "v1"
+        });
+
+    options.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            Description = "Please enter valid token.",
+            BearerFormat = "JWT",
+        });
+
+    options.AddSecurityRequirement(
+        document => new OpenApiSecurityRequirement
+        {
+            [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+        });
+
+});
 
 //Database
 builder.Services.AddDbContext<ApplicationDbContext>((options) =>
@@ -48,23 +77,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
+
         ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidAudience = builder.Configuration["JWT:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey
         (
-            Encoding.UTF8.GetBytes($"{builder.Configuration["JWT:SigingKey"]}")
+            Encoding.UTF8.GetBytes($"{builder.Configuration["JWT:SigningKey"]}")
         ),
     };
+
 });
 
-builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+builder.Services.AddIdentityCore<AppUser>(options =>
 {
     options.Password.RequireDigit = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 12;
     options.Password.RequiredUniqueChars = 4;
     options.Password.RequireLowercase = true;
-}).AddEntityFrameworkStores<ApplicationDbContext>();
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddSignInManager();
 
 builder.Services.AddAuthorization();
 
