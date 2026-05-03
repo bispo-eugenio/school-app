@@ -4,11 +4,13 @@ using schoolApi.Mappers;
 using schoolApi.DTOs.TeacherDtos;
 using Microsoft.EntityFrameworkCore;
 using schoolApi.Helpers.QueryableObjects;
+using Microsoft.AspNetCore.Authorization;
 
 namespace schoolApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class TeacherController : ControllerBase
 {
     private readonly ITeacherService _teacherService;

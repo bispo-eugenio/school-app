@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace schoolApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class AccountController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;
@@ -74,7 +76,7 @@ public class AccountController : ControllerBase
 
         catch (Exception e)
         {
-            return StatusCode(500, e);
+            return StatusCode(500, e.Message);
         }
 
     }
@@ -129,7 +131,7 @@ public class AccountController : ControllerBase
 
         catch (Exception e)
         {
-            return StatusCode(500, e);
+            return StatusCode(500, e.Message);
         }
 
     }
@@ -185,7 +187,7 @@ public class AccountController : ControllerBase
 
         catch (Exception e)
         {
-            return StatusCode(500, e);
+            return StatusCode(500, e.Message);
         }
 
     }

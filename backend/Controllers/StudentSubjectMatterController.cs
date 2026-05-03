@@ -4,11 +4,13 @@ using schoolApi.Interfaces;
 using schoolApi.Mappers;
 using schoolApi.Helpers;
 using schoolApi.Helpers.QueryableObjects;
+using Microsoft.AspNetCore.Authorization;
 
 namespace schoolApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class StudentSubjectMatterController : ControllerBase
 {
     private readonly IStudentSubjectMatterService _studentSubjectMatterService;

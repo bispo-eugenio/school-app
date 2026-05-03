@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using schoolApi.DTOs.CourseDtos;
 using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
@@ -8,6 +9,7 @@ namespace schoolApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class CourseController : ControllerBase
 {
     private readonly ICourseService _courseService;

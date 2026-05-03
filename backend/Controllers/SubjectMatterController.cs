@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using schoolApi.DTOs.SubjectMatterDtos;
 using schoolApi.Helpers.QueryableObjects;
 using schoolApi.Interfaces;
@@ -7,6 +8,7 @@ namespace schoolApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class SubjectMatterController : ControllerBase
 {
     private readonly ISubjectMatterService _subjectMatterService;
