@@ -5,8 +5,6 @@
 # Environments
 *.env
 
-# Migrations EF
-Migrations/
 
 # User-specific files
 *.suo
