@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/styles.css" />
+        <title>Login</title>
+    </head>
+    <body>
+        <section class="login-container">
+            <div class="login-container__box">
+                <form
+                    <!--action="http://localhost:5179/api/Account/login"-->
+                    method="post"
+                >
+                    <fieldset>
+                        <legend>Login</legend>
+                        <label for="username">Name</label>
+                        <input type="text" name="name" required />
+                        <label for="password">Password</label>
+                        <input type="password" name="password" required />
+                        <input type="submit" />
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
