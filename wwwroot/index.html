@@ -3,26 +3,59 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./css/styles.css" />
+        <link rel="stylesheet" href="./public/css/styles.css" />
         <title>Login</title>
     </head>
     <body>
         <section class="login-container">
             <div class="login-container__box">
-                <form
-                    <!--action="http://localhost:5179/api/Account/login"-->
-                    method="post"
-                >
-                    <fieldset>
-                        <legend>Login</legend>
-                        <label for="username">Name</label>
-                        <input type="text" name="name" required />
-                        <label for="password">Password</label>
-                        <input type="password" name="password" required />
-                        <input type="submit" />
+                <form method="post" class="form-container">
+                    <fieldset class="form-container__fieldset">
+                        <h2>Login</h2>
+                        <div class="form-container__box">
+                            <div class="form-container__box-input">
+                                <label for="username"
+                                    ><img
+                                        src="public/icons/person-fill.svg"
+                                        alt="person icon"
+                                /></label>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    required
+                                />
+                            </div>
+                            <div class="form-container__box-input">
+                                <button
+                                    type="button"
+                                    class="form-container__btn"
+                                    onclick="handlerPassword()"
+                                >
+                                    <img
+                                        src="public/icons/eye-slash-fill.svg"
+                                        alt="password icon"
+                                        class="form-container__img"
+                                    />
+                                </button>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-container__input-password"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <button class="generic-btn">Enviar</button>
                     </fieldset>
+                    <p class="form-container__text">
+                        Não tem cadastro?
+                        <a href="pages/signUp.html">cadastrar-se</a>
+                    </p>
                 </form>
             </div>
         </section>
+        <script src="script/index.js"></script>
     </body>
 </html>

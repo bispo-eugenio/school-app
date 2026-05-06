@@ -1,0 +1,154 @@
+section.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(
+        90deg,
+        var(--color-gray-0) 0%,
+        var(--color-gray-1) 50%,
+        var(--color-gray-2) 100%
+    );
+}
+
+div.login-container__box {
+    font-size: 1.5rem;
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    max-width: 450px;
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-light-gray);
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgb(0, 0, 0, 0.25);
+}
+
+fieldset.form-container__fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 100%;
+    gap: 8rem;
+}
+
+fieldset.form-container__fieldset > h2 {
+    font-size: 4rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+div.form-container__box {
+    display: flex;
+    width: auto;
+    height: 100%;
+    max-height: 50px;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+div.form-container__box-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.form-container__box-input > label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+div.form-container__box-input > label > img,
+div.form-container__box-input > button {
+    background-color: var(--color-cyan-0);
+    border: 1px solid transparent;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    transition: 100ms ease-in;
+}
+
+div.form-container__box-input > label > img:hover,
+div.form-container__box-input > button:hover {
+    background-color: var(--color-cyan-1);
+}
+
+div.form-container__box-input > label > img:active,
+div.form-container__box-input > button:active {
+    background-color: var(--color-cyan-2);
+}
+
+div.form-container__box-input > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+div.form-container__box-input > button > img {
+    transform: scale(1.5);
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+div.form-container__box-input > label > img {
+    width: 40px;
+    height: 40px;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+div.form-container__box-input > input {
+    height: 35px;
+}
+
+button.generic-btn {
+    max-width: 200px;
+    max-height: 45px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background-color: var(--color-cyan-0);
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 100ms ease-in;
+    box-shadow: 4px 4px 10px #00000075;
+}
+
+button.generic-btn:hover {
+    border-color: #000000;
+    background-color: var(--color-cyan-1);
+}
+
+button.generic-btn:active {
+    background-color: var(--color-cyan-2);
+}
+
+p.form-container__text {
+    font-size: 1rem;
+}
