@@ -1,8 +1,15 @@
 :root {
     --background-light-gray: #c9dcda;
+    --color-white-0: #f3f3f3;
     --color-gray-0: #becfce;
     --color-gray-1: #b9c8c8;
     --color-gray-2: #b3c1c1;
+    --color-black-0: #0c0c0b;
+    --color-black-1: #080808;
+    --color-black-2: #040402;
+    --color-green-0: #686f3f;
+    --color-green-1: #606836;
+    --color-green-2: #4e5429;
     --color-cyan-0: #679f9a;
     --color-cyan-1: #3c8780;
     --color-cyan-2: #106f66;

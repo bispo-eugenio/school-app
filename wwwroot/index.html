@@ -7,21 +7,21 @@
         <title>Login</title>
     </head>
     <body>
-        <section class="login-container">
+        <section class="index-container">
             <div class="login-container__box">
                 <form method="post" class="form-container">
-                    <fieldset class="form-container__fieldset">
-                        <h2>Login</h2>
+                    <fieldset class="form-container__sign-in">
+                        <h2 class="form-container__title">Login</h2>
                         <div class="form-container__box">
                             <div class="form-container__box-input">
-                                <label for="username"
+                                <label for="username-signIn"
                                     ><img
                                         src="public/icons/person-fill.svg"
                                         alt="person icon"
                                 /></label>
                                 <input
                                     type="text"
-                                    id="username"
+                                    id="username-signIn"
                                     name="username"
                                     required
                                 />
@@ -47,12 +47,85 @@
                                 />
                             </div>
                         </div>
-                        <button class="generic-btn">Enviar</button>
+                        <button class="generic-btn" onclick="handlerLogin()">
+                            Enviar
+                        </button>
                     </fieldset>
-                    <p class="form-container__text">
-                        Não tem cadastro?
-                        <a href="pages/signUp.html">cadastrar-se</a>
-                    </p>
+                    <fieldset class="form-container__sign-up">
+                        <h2 class="form-container__title">Cadastrar</h2>
+                        <div class="form-container__box">
+                            <div class="form-container__box-input">
+                                <label for="username-signUp"
+                                    ><img
+                                        src="public/icons/person-fill.svg"
+                                        alt="person icon"
+                                /></label>
+                                <input
+                                    type="text"
+                                    id="username-signUp"
+                                    name="username"
+                                    required
+                                />
+                            </div>
+                            <div class="form-container__box-input">
+                                <label for="email"
+                                    ><img
+                                        src="public/icons/envelope-fill.svg"
+                                        alt="person icon"
+                                /></label>
+                                <input
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    required
+                                />
+                            </div>
+                            <div class="form-container__box-input">
+                                <label for="email-check"
+                                    ><img
+                                        src="public/icons/envelope-check-fill.svg"
+                                        alt="person icon"
+                                /></label>
+                                <input
+                                    type="text"
+                                    id="email-check"
+                                    name="email-check"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-container__box-input">
+                                <button
+                                    type="button"
+                                    class="form-container__btn"
+                                    onclick="handlerPassword()"
+                                >
+                                    <img
+                                        src="public/icons/eye-slash-fill.svg"
+                                        alt="password icon"
+                                        class="form-container__img"
+                                    />
+                                </button>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-container__input-password"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <button class="generic-btn" onclick="handlerSignUp()">
+                            Cadastrar
+                        </button>
+                    </fieldset>
+                    <button
+                        type="button"
+                        class="signIn-and-signUp"
+                        onclick="handlerLoginSwitch()"
+                    >
+                        cadastrar-se
+                    </button>
                 </form>
             </div>
         </section>
