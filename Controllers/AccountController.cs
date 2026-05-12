@@ -110,8 +110,7 @@ public class AccountController : ControllerBase
                     return Ok(new NewUserDTO
                     {
                         Username = appUser.UserName,
-                        Email = appUser.Email,
-                        Token = _tokenService.CreateToken(appUser)
+                        Email = appUser.Email
                     });
 
                 else
@@ -164,8 +163,7 @@ public class AccountController : ControllerBase
                     return Ok(new NewUserDTO
                     {
                         Username = appUser.UserName,
-                        Email = appUser.Email,
-                        Token = _tokenService.CreateToken(appUser)
+                        Email = appUser.Email
                     });
 
                 else
