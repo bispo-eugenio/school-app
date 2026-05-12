@@ -14,14 +14,14 @@
                         <h2 class="form-container__title">Login</h2>
                         <div class="form-container__box">
                             <div class="form-container__box-input">
-                                <label for="username-signIn"
+                                <label for="username-sign-in"
                                     ><img
                                         src="public/icons/person-fill.svg"
                                         alt="person icon"
                                 /></label>
                                 <input
                                     type="text"
-                                    id="username-signIn"
+                                    id="username-sign-in"
                                     name="username"
                                     required
                                 />
@@ -30,7 +30,7 @@
                                 <button
                                     type="button"
                                     class="form-container__btn"
-                                    onclick="handlerPassword()"
+                                    name="password-sign-in"
                                 >
                                     <img
                                         src="public/icons/eye-slash-fill.svg"
@@ -40,14 +40,18 @@
                                 </button>
                                 <input
                                     type="password"
-                                    id="password"
+                                    id="password-sign-in"
                                     name="password"
                                     class="form-container__input-password"
                                     required
                                 />
                             </div>
                         </div>
-                        <button class="generic-btn" onclick="handlerLogin()">
+                        <button
+                            type="submit"
+                            class="generic-btn"
+                            name="sign-in"
+                        >
                             Enviar
                         </button>
                     </fieldset>
@@ -55,16 +59,17 @@
                         <h2 class="form-container__title">Cadastrar</h2>
                         <div class="form-container__box">
                             <div class="form-container__box-input">
-                                <label for="username-signUp"
+                                <label for="username-sign-up"
                                     ><img
                                         src="public/icons/person-fill.svg"
                                         alt="person icon"
                                 /></label>
                                 <input
                                     type="text"
-                                    id="username-signUp"
+                                    id="username-sign-up"
                                     name="username"
                                     required
+                                    disabled
                                 />
                             </div>
                             <div class="form-container__box-input">
@@ -78,6 +83,7 @@
                                     id="email"
                                     name="email"
                                     required
+                                    disabled
                                 />
                             </div>
                             <div class="form-container__box-input">
@@ -91,6 +97,7 @@
                                     id="email-check"
                                     name="email-check"
                                     required
+                                    disabled
                                 />
                             </div>
 
@@ -98,7 +105,7 @@
                                 <button
                                     type="button"
                                     class="form-container__btn"
-                                    onclick="handlerPassword()"
+                                    name="password-sign-up"
                                 >
                                     <img
                                         src="public/icons/eye-slash-fill.svg"
@@ -108,27 +115,28 @@
                                 </button>
                                 <input
                                     type="password"
-                                    id="password"
+                                    id="password-sign-up"
                                     name="password"
                                     class="form-container__input-password"
                                     required
+                                    disabled
                                 />
                             </div>
                         </div>
-                        <button class="generic-btn" onclick="handlerSignUp()">
+                        <button
+                            type="button"
+                            class="generic-btn"
+                            name="sign-up"
+                        >
                             Cadastrar
                         </button>
                     </fieldset>
-                    <button
-                        type="button"
-                        class="signIn-and-signUp"
-                        onclick="handlerLoginSwitch()"
-                    >
+                    <button type="submit" class="signIn-and-signUp">
                         cadastrar-se
                     </button>
                 </form>
             </div>
         </section>
-        <script src="script/index.js"></script>
+        <script type="module" src="/script/index.js"></script>
     </body>
 </html>
