@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../public/css/styles.css" />
+        <title>Home</title>
+    </head>
+    <body class="body-container">
+        <aside class="body-container__aside">
+            <ul class="body-container__ul">
+                <li class="body-container__li">
+                    <label for="dashboard" class="body-container__label"
+                        >Dashboard</label
+                    >
+                    <input
+                        type="radio"
+                        id="dashboard"
+                        class="body-container__input option-select"
+                        value="0"
+                        checked
+                    />
+                </li>
+                <li class="body-container__li">
+                    <label for="classroom" class="body-container__label"
+                        >Classroom</label
+                    >
+                    <input
+                        type="radio"
+                        id="classroom"
+                        class="body-container__input"
+                        value="1"
+                    />
+                </li>
+                <li class="body-container__li">
+                    <label for="course" class="body-container__label"
+                        >Course</label
+                    >
+                    <input
+                        type="radio"
+                        id="course"
+                        class="body-container__input"
+                        value="2"
+                    />
+                </li>
+                <li class="body-container__li">
+                    <label for="subject-matter" class="body-container__label"
+                        >SubjectMatter</label
+                    >
+                    <input
+                        type="radio"
+                        id="subject-matter"
+                        class="body-container__input"
+                        value="3"
+                    />
+                </li>
+                <li class="body-container__li">
+                    <label for="student" class="body-container__label"
+                        >Student</label
+                    >
+                    <input
+                        type="radio"
+                        id="student"
+                        class="body-container__input"
+                        value="4"
+                    />
+                </li>
+                <li class="body-container__li">
+                    <label for="teacher" class="body-container__label"
+                        >Teacher</label
+                    >
+                    <input
+                        type="radio"
+                        id="teacher"
+                        class="body-container__input"
+                        value="5"
+                    />
+                </li>
+            </ul>
+        </aside>
+        <section class="section-container section-0">0</section>
+        <section class="section-container section-1">
+            <form class="section-container_form">
+                <fieldset class="section-container__fieldset">
+                    <div>
+                        <label
+                            for="classroom-name"
+                            class="section-container__label"
+                        >
+                            <img src="../public/icons/archive-fill.svg" />
+                        </label>
+                        <input
+                            type="text"
+                            id="classroom-name"
+                            class="section-container__input"
+                            placeholder="Name"
+                            required
+                        />
+                    </div>
+                    <button class="section-container__btn" name="classroom-btn">
+                        Cadastrar
+                    </button>
+                </fieldset>
+            </form>
+            <dialog class="section-container__dialog">
+                <form class="dialog-form" method="dialog">
+                    <fieldset class="dialog-form__fieldset">
+                        <div>
+                            <label for="classroom-id">ID</label>
+                            <input
+                                type="text"
+                                id="classroom-id"
+                                class="dialog-form__input"
+                                disabled
+                            />
+                            <label
+                                for="classroom-name"
+                                class="dialog-form__label"
+                            >
+                                <img src="../public/icons/archive-fill.svg" />
+                            </label>
+                            <input
+                                type="text"
+                                id="classroom-name"
+                                class="dialog-form__input"
+                            />
+                        </div>
+                        <button
+                            class="dialog-form__btn-update"
+                            name="classroom-btn-update"
+                        >
+                            Atualizar
+                        </button>
+                        <button
+                            class="dialog-form__btn-close"
+                            name="classroom-btn-close"
+                        >
+                            Fechar
+                        </button>
+                    </fieldset>
+                </form>
+            </dialog>
+        </section>
+        <section class="section-container section-2">2</section>
+        <section class="section-container section-3">3</section>
+        <section class="section-container section-4">4</section>
+        <section class="section-container section-5">5</section>
+        <script type="module" src="../script/home.js"></script>
+    </body>
+</html>
