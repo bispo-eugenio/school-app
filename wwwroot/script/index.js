@@ -79,7 +79,7 @@ function handlerSignIn() {
 
   if (usernameStr.length < 3 || usernameStr.length > 25) {
     alert("Nome deve estar entre 3 a 25 caracteres.");
-    return false;
+    return;
   }
 
   if (!password.length == 12) {
@@ -89,7 +89,7 @@ function handlerSignIn() {
 
   if (!NAME_REGEX.test(username.value)) {
     alert("Nome deve ter apenas letras.");
-    return false;
+    return;
   }
 
   if (!PASSWORD_REGEX.test(password.value)) {

@@ -15,7 +15,6 @@ public class CourseValidator : AbstractValidator<Course>
         .WithMessage("Course name must contain only letters.");
 
         RuleFor(x => x.Details)
-        .Null()
         .Length(10, 1000)
         .WithMessage("Course details must be between 10 and 1000 characters.");
     }

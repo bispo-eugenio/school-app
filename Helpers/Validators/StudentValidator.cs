@@ -21,11 +21,11 @@ public class StudentValidator
 
         RuleFor(x => x.Age)
         .NotNull()
-        .ExclusiveBetween(18, 140)
+        .InclusiveBetween(18, 140)
         .WithMessage("Age must be between 18 and 140.");
 
         RuleFor(x => x.CourseId)
-        .ExclusiveBetween(1, 999999)
+        .InclusiveBetween(1, 999999)
         .NotNull()
         .WithMessage("Course Id must be between 1 and 999999.");
     }

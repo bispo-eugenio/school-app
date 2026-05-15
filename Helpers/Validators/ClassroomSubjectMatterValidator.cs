@@ -38,7 +38,6 @@ AbstractValidator<ClassroomSubjectMatter>
         .WithMessage("Ended At must be in format 00:00:00");
 
         RuleFor(x => x.Details)
-        .Null()
         .MaximumLength(1000)
         .MinimumLength(10)
         .WithMessage("Classroom Subject Matter details" +

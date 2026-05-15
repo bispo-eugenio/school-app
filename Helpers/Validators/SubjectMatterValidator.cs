@@ -16,14 +16,12 @@ public class SubjectMatterValidator
         .WithMessage("Subject Matter name must contain only letters.");
 
         RuleFor(x => x.Details)
-        .Null()
         .Length(10, 1000)
         .WithMessage("Course details must be between 10 and 1000 characters.");
 
         RuleFor(x => x.TeacherId)
-        .Null()
-        .ExclusiveBetween(1, 999999)
-        .WithMessage("Teacher Id must be between 10 and 1000.");
+        .InclusiveBetween(1, 999999)
+        .WithMessage("Teacher Id must be between 1 and 999999.");
 
     }
 
