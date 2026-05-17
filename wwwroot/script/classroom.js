@@ -6,14 +6,12 @@ export function handlerAddClassroom() {
     "input.section-container__input[id=classroom-name]",
   );
   const token = localStorage.getItem("token");
-
   if (!NAME_CLASSROOM_REGEX.test(classroomName.value)) {
     alert(
       "Classroom name deve ter apenas letras e números. (LAB1, INFO-3, CLASS-43A, etc",
     );
     return;
   }
-
   fetch(`${API_URL}/Classroom`, {
     method: "POST",
     headers: {
@@ -50,9 +48,16 @@ export function handlerRemoveClassroom(id) {
 export function handlerUpdateClassroom(id, name) {
   let idClassroom = parseInt(id);
   const token = localStorage.getItem("token");
+
+  if (name.trim().length == 0) {
+    alert("Dados não podem ser atualizado por causa que existe campo vazio.");
+    return;
+  }
+
   if (!NAME_CLASSROOM_REGEX.test(name)) {
     alert(
-      "Classroom name deve ter apenas letras e números. (LAB1, INFO-3, CLASS-43A, etc",
+      "Nome não pode ser atualizado por causa que não segue o padrão definido. " +
+        "Exemplo: LAB1, INFO-3, CLASS-43A, etc.",
     );
     return;
   }
@@ -68,7 +73,10 @@ export function handlerUpdateClassroom(id, name) {
     }),
   })
     .then((response) => {
-      if (response.ok) handlerLoadClassroom();
+      if (response.ok) {
+        handlerLoadClassroom();
+        alert("Atualizanção feita com sucesso!");
+      }
     })
     .catch((e) => console.error(e.message));
 }
@@ -116,12 +124,13 @@ export function handlerLoadClassroom() {
       const newTable = document.createElement("table");
       const tr = document.createElement("tr");
 
+      newTable.classList.add("section-container__table");
       if (table != null) section.removeChild(table);
       newTable.classList.add("section-container__table");
       columnList.forEach((index) => {
-        const td = document.createElement("td");
-        td.innerText = index;
-        tr.appendChild(td);
+        const th = document.createElement("th");
+        th.innerText = index;
+        tr.appendChild(th);
       });
       newTable.appendChild(tr);
       data.forEach((item) => {
@@ -131,11 +140,17 @@ export function handlerLoadClassroom() {
           td.innerText = item[props];
           tr.appendChild(td);
         });
-        let tdUpdate = handlerCreateButtonToTable("Update", "Button", () =>
-          handlerCallDialogToClassroom(item),
+        let tdUpdate = handlerCreateButtonToTable(
+          "Update",
+          "Button",
+          "section-container__btn-update",
+          () => handlerCallDialogToClassroom(item),
         );
-        let tdDelete = handlerCreateButtonToTable("Delete", "Button", () =>
-          handlerRemoveClassroom(item["id"]),
+        let tdDelete = handlerCreateButtonToTable(
+          "Delete",
+          "Button",
+          "section-container__btn-delete",
+          () => handlerRemoveClassroom(item["id"]),
         );
         tr.appendChild(tdUpdate);
         tr.appendChild(tdDelete);

@@ -1,8 +1,9 @@
-export function handlerCreateButtonToTable(text, type, func) {
+export function handlerCreateButtonToTable(text, type, classStyle, func) {
   const td = document.createElement("td");
   const button = document.createElement("button");
   button.innerText = text;
   button.type = type;
+  button.classList.add(classStyle);
   button.addEventListener("click", func);
   td.appendChild(button);
   return td;
