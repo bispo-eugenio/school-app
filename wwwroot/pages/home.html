@@ -106,37 +106,47 @@
                 <form class="dialog-form" method="dialog">
                     <fieldset class="dialog-form__fieldset">
                         <div>
-                            <label for="classroom-id">ID</label>
+                            <label for="classroom-id" class="dialog-form__label"
+                                ><img
+                                    src="../public/icons/person-badge-fill.svg"
+                            /></label>
                             <input
                                 type="text"
                                 id="classroom-id"
                                 class="dialog-form__input"
                                 disabled
                             />
+                        </div>
+                        <div>
                             <label
                                 for="classroom-name"
                                 class="dialog-form__label"
                             >
-                                <img src="../public/icons/archive-fill.svg" />
+                                <img
+                                    src="../public/icons/person-vcard-fill.svg"
+                                />
                             </label>
                             <input
                                 type="text"
                                 id="classroom-name"
                                 class="dialog-form__input"
+                                placeholder="Name"
                             />
                         </div>
-                        <button
-                            class="dialog-form__btn-update"
-                            name="classroom-btn-update"
-                        >
-                            Atualizar
-                        </button>
-                        <button
-                            class="dialog-form__btn-close"
-                            name="classroom-btn-close"
-                        >
-                            Fechar
-                        </button>
+                        <div>
+                            <button
+                                class="dialog-form__btn-update"
+                                name="classroom-btn-update"
+                            >
+                                Atualizar
+                            </button>
+                            <button
+                                class="dialog-form__btn-close"
+                                name="classroom-btn-close"
+                            >
+                                Fechar
+                            </button>
+                        </div>
                     </fieldset>
                 </form>
             </dialog>
