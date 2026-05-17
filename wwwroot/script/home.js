@@ -69,4 +69,8 @@ document
   .querySelector("form.section-container_form")
   .addEventListener("submit", (event) => event.preventDefault());
 
+window.addEventListener("load", () => {
+  handlerLoadClassroom();
+});
+
 redirect();

@@ -117,7 +117,7 @@ export function handlerLoadClassroom() {
   })
     .then((response) => response.json())
     .then((data) => {
-      const columnList = ["Register", "Name", "Update", "Delete"];
+      const columnList = ["Registro", "Nome", "Opção 1", "Opção 2"];
       const propsList = ["register", "name"];
       const section = document.querySelector("section.section-1");
       const table = document.querySelector("table.section-container__table");
@@ -141,13 +141,13 @@ export function handlerLoadClassroom() {
           tr.appendChild(td);
         });
         let tdUpdate = handlerCreateButtonToTable(
-          "Update",
+          "Atualizar",
           "Button",
           "section-container__btn-update",
           () => handlerCallDialogToClassroom(item),
         );
         let tdDelete = handlerCreateButtonToTable(
-          "Delete",
+          "Excluir",
           "Button",
           "section-container__btn-delete",
           () => handlerRemoveClassroom(item["id"]),

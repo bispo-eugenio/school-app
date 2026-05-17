@@ -96,7 +96,6 @@
     flex-direction: column;
 }
 
-.section-1,
 .section-2,
 .section-3,
 .section-4,
@@ -216,6 +215,7 @@
 .section-container__table > tr > th {
     background-color: var(--color-blue-0);
     font-weight: 700;
+    text-wrap: nowrap;
 }
 
 .section-container__btn-update,
